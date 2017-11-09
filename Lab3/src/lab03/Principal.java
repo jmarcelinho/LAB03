@@ -15,7 +15,14 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Agenda agenda = new Agenda();
+        agenda.cadastrarContatos(1, "Marcelo", "68154844135");
+        agenda.cadastrarContatos(2, "pigmeu", "6666689451");
+        agenda.cadastrarContatos(6, "Doug", "5456454987");
+        System.out.println(agenda.pesquisarContato(5));
+        System.out.println(agenda.pesquisarContato(1));
+        System.out.println(agenda.listarContatos());
+        
     }
     
 }
