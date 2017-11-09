@@ -19,4 +19,8 @@ public class Contato {
         this.sobrenome = sobrenome;
         this.telefone = telefone;
     }
+    
+    public String toString(){
+        return nome + " " + sobrenome + " " + telefone;
+    }
 }
