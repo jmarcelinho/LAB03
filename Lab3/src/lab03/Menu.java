@@ -9,7 +9,7 @@ package lab03;
  *
  * @author joao
  */
-public class Principal {
+public class Menu {
 
     /**
      * @param args the command line arguments
