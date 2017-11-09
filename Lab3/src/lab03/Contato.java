@@ -21,6 +21,6 @@ public class Contato {
     }
     
     public String toString(){
-        return nome + " " + telefone;
+        return nome + " " + sobrenome + " " + telefone;
     }
 }

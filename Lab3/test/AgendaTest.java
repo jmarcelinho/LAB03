@@ -17,11 +17,12 @@ import static org.junit.Assert.*;
  */
 public class AgendaTest {
     
+    private Agenda agenda;
     public AgendaTest() {
     }
     
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass(){
     }
     
     @AfterClass
@@ -39,14 +40,15 @@ public class AgendaTest {
     public void testCadastrarContatos() {
         System.out.println("cadastrarContatos");
         int posicao = 0;
-        String nome = "";
-        String telefone = "";
+        String nome = "Joao";
+        String sobrenome = "Marcelo";
+        String telefone = "12345";
         Agenda instance = new Agenda();
-        boolean expResult = false;
-        boolean result = instance.cadastrarContatos(posicao, nome, telefone);
+        boolean expResult = true;
+        boolean result = instance.cadastrarContatos(posicao, nome, sobrenome, telefone);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("Deu erro no cadastro de contato");
     }
 
     /**
@@ -57,7 +59,7 @@ public class AgendaTest {
         System.out.println("pesquisarContato");
         int posicao = 0;
         Agenda instance = new Agenda();
-        String expResult = "";
+        String expResult = "Joao Marcelo 123456";
         String result = instance.pesquisarContato(posicao);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.

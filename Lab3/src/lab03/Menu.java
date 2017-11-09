@@ -16,9 +16,6 @@ public class Menu {
      */
     public static void main(String[] args) {
         Agenda agenda = new Agenda();
-        agenda.cadastrarContatos(1, "Marcelo", "68154844135");
-        agenda.cadastrarContatos(2, "pigmeu", "6666689451");
-        agenda.cadastrarContatos(6, "Doug", "5456454987");
         System.out.println(agenda.pesquisarContato(5));
         System.out.println(agenda.pesquisarContato(1));
         System.out.println(agenda.listarContatos());
