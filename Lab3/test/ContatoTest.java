@@ -24,8 +24,11 @@ public class ContatoTest {
     }
     
     @Test
-    public void testAgendaString(){
-        
+    public void testContatoString(){
+        Contato c2 = new Contato("Dorime", "Ameno", "6545666");
+        assertEquals("Dorime", c2.getNome());
+        assertEquals("Ameno", c2.getSobrenome());
+        assertEquals("6545666", c2.getTelefone());
     }
     /**
      * Teste do metodo toString da classe Contato.

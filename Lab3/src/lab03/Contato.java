@@ -19,6 +19,19 @@ public class Contato {
         this.sobrenome = sobrenome;
         this.telefone = telefone;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+    
     
     public String toString(){
         return nome + " " + sobrenome + " " + telefone;

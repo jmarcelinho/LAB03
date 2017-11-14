@@ -6,10 +6,14 @@ package lab03;
  */
 public class Agenda {
     private Contato contatos[];
-    
     public Agenda(){
         this.contatos = new Contato[100];
     }
+
+    public Contato[] getContatos() {
+        return contatos;
+    }
+    
     
     private void testaNome(String nome, String sobrenome){
         if(nome==null || sobrenome==null) throw new NullPointerException();
@@ -21,6 +25,7 @@ public class Agenda {
         if(cont==nome.length()) throw new IllegalArgumentException();
     }
     public boolean cadastrarContatos(int posicao, String nome, String sobrenome, String telefone){
+        testaNome(nome, sobrenome);
         if(posicao < 1 || posicao > 100) return false;
         this.contatos[--posicao] = new Contato(nome, sobrenome, telefone);
         return true;

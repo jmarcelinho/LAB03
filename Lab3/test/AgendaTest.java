@@ -6,8 +6,8 @@
 
 import lab03.Agenda;
 import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,67 +18,50 @@ import static org.junit.Assert.*;
 public class AgendaTest {
     
     private Agenda agenda;
-    public AgendaTest() {
-    }
     
-    @BeforeClass
-    public void setUpClass(){
+    @Before
+    public void setUp(){
         agenda = new Agenda();
     }
     
-    @AfterClass
-    public void tearDownClass() {
+    @Test
+    public void testAgenda(){
+        Agenda a2 = new Agenda();
+        a2.cadastrarContatos(1, "j", "m", "555");
+        a2.listarContatos();
+        Object c[] = new Object[100]; 
+        Assert.assertArrayEquals(c, agenda.getContatos());
     }
-    
-    @After
-    public void tearDown() {
-    }
-
     /**
-     * Test of cadastrarContatos method, of class Agenda.
+     * Teste do metodo cadastrarContatos da classe Agenda.
      */
     @Test
     public void testCadastrarContatos() {
         System.out.println("cadastrarContatos");
-        int posicao = 0;
+        int posicao = 1;
         String nome = "Joao";
         String sobrenome = "Marcelo";
         String telefone = "12345";
-        Agenda instance = new Agenda();
+        agenda.cadastrarContatos(posicao, nome, sobrenome, telefone);
         boolean expResult = true;
-        boolean result = instance.cadastrarContatos(posicao, nome, sobrenome, telefone);
+        boolean result = agenda.cadastrarContatos(posicao, nome, sobrenome, telefone);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("Deu erro no cadastro de contato");
     }
 
     /**
-     * Test of pesquisarContato method, of class Agenda.
+     * Teste do metodo pesquisarContato da classe Agenda.
      */
     @Test
     public void testPesquisarContato() {
-        System.out.println("pesquisarContato");
-        int posicao = 0;
-        Agenda instance = new Agenda();
-        String expResult = "Joao Marcelo 123456";
-        String result = instance.pesquisarContato(posicao);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
-     * Test of listarContatos method, of class Agenda.
+     * Teste do metodo listarContatos da classe Agenda.
      */
     @Test
     public void testListarContatos() {
-        System.out.println("listarContatos");
-        Agenda instance = new Agenda();
-        String expResult = "";
-        String result = instance.listarContatos();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }
