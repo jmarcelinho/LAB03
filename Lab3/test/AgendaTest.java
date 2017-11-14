@@ -22,11 +22,12 @@ public class AgendaTest {
     }
     
     @BeforeClass
-    public static void setUpClass(){
+    public void setUpClass(){
+        agenda = new Agenda();
     }
     
     @AfterClass
-    public static void tearDownClass() {
+    public void tearDownClass() {
     }
     
     @After
