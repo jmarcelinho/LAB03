@@ -6,23 +6,25 @@ package lab03;
  */
 public class Agenda {
     private Contato contatos[];
+    private int numeroContatos;
     public Agenda(){
         this.contatos = new Contato[100];
+        this.numeroContatos = 0;
     }
 
-    public Contato[] getContatos() {
-        return contatos;
+    public int getNumeroContatos() {
+        return this.numeroContatos;
     }
     
     
     private void testaNome(String nome, String sobrenome){
-        if(nome==null || sobrenome==null) throw new NullPointerException();
-        if(nome=="" || sobrenome=="") throw new IllegalArgumentException();
+        if(nome == null || sobrenome == null) throw new NullPointerException();
+        if(nome == "" || sobrenome == "") throw new IllegalArgumentException();
         int cont = 0;
-        for(int i=0; i<nome.length();i++){
+        for(int i = 0; i < nome.length(); i++){
             if(nome.charAt(i) == ' ') cont++;
         }
-        if(cont==nome.length()) throw new IllegalArgumentException();
+        if(cont == nome.length()) throw new IllegalArgumentException();
     }
     public boolean cadastrarContatos(int posicao, String nome, String sobrenome, String telefone){
         testaNome(nome, sobrenome);
@@ -32,15 +34,17 @@ public class Agenda {
     }
     
     public String pesquisarContato(int posicao){
-        if(contatos[posicao-1]==null) throw new NullPointerException();
+        if(contatos[posicao - 1] == null){
+            return "POSIÇÃO INVÁLIDA";
+        }
         return contatos[posicao-1].toString();
     }
     
     public String listarContatos(){
         String retorno = "";
         for(int i = 0; i < 100; i++){
-            if(contatos[i]!=null){
-                retorno+= i+1 + " - " + contatos[i].toString() + "\n";
+            if(contatos[i] != null){
+                retorno += i+1 + " - " + contatos[i].toString() + "\n";
             }
         }
         return retorno;
