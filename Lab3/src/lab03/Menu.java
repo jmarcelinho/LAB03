@@ -36,7 +36,7 @@ public class Menu {
                 case "S":
                     break;
                 default:
-                    System.out.println("OPÇÃO INVÁLIDA!");
+                    System.out.println("OPÇÃO INVÁLIDA!\n");
             }
         }while(!opcao.equals("S"));
     }
@@ -59,9 +59,9 @@ public class Menu {
         String telefone = sc.nextLine();
         boolean cadastrado = agenda.cadastrarContatos(pos, nome, sobrenome, telefone);
         if(cadastrado){
-            System.out.println("CADASTRO REALIZADO!");
+            System.out.println("CADASTRO REALIZADO!\n");
         }else{
-            System.out.println("POSIÇÃO INVÁLIDA!");
+            System.out.println("POSIÇÃO INVÁLIDA!\n");
         }
         
     }
@@ -73,7 +73,6 @@ public class Menu {
         System.out.printf("Contato> ");
         posicao = sc.nextInt();
         sc.nextLine();
-        System.out.println(agenda.pesquisarContato(posicao));
+        System.out.println("\n" + agenda.pesquisarContato(posicao)+ "\n");
     }
-    
 }

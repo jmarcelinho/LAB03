@@ -36,7 +36,7 @@ public class ContatoTest {
     @Test
     public void testToString() {
         String result = contato.toString();
-        String expResult = "Amandio Jose 86661543";
+        String expResult = "Amandio Jose - 86661543";
         assertEquals(expResult, result);
     }
     
