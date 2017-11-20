@@ -12,99 +12,70 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author joaomfsj
+ * @author Joao Marcelo
  */
 public class ContatoTest {
     
     private Contato contato;
     private Contato contato2;
-    private String nome;
-    private String sobrenome;
-    private String telefone;
+    
     @Before
     public void setUp() {
-        contato = new Contato("Amandio", "Jose", "86661543");
+        contato = new Contato("Joao", "Marcelo", "86661543");
         
     }
     
     @Test(expected = NullPointerException.class)
     public void testNomeNull(){
-        nome = null;
-        sobrenome = "Marcelo";
-        telefone = "125484";
-        contato = new Contato(nome, sobrenome, telefone);
+        contato = new Contato(null, "Marcelo", "125484");
         fail("Cadastrou contato com nome null");
     }
     
     @Test(expected = NullPointerException.class)
     public void testSobrenomeNull(){
-        nome = "Marcelo";
-        sobrenome = null;
-        telefone = "125484";
-        contato = new Contato(nome, sobrenome, telefone);
+        contato = new Contato("Marcelo", null, "125484");
         fail("Cadastrou contato com sobrenome null");
     }
     
     @Test(expected = NullPointerException.class)
     public void testTelefoneNull(){
-        nome = "Marcelo";
-        sobrenome = "Fernandes";
-        telefone = null;
-        contato = new Contato(nome, sobrenome, telefone);
+        contato = new Contato("Marcelo", "Fernandes", null);
         fail("Cadastrou contato com telefone null");
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testNomeEspacos(){
-        nome = "   ";
-        sobrenome = "Fernandes";
-        telefone = "12548";
-        contato = new Contato(nome, sobrenome, telefone);
+        contato = new Contato("   ", "Fernandes", "12548");
         fail("Cadastrou contato com nome apenas com espaço");
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testSobrenomeEspacos(){
-        nome = "Marcelo";
-        sobrenome = "   ";
-        telefone = "12548";
-        contato = new Contato(nome, sobrenome, telefone);
+        contato = new Contato("Marcelo", "   ", "12548");
         fail("Cadastrou contato com sobrenome apenas com espaço");
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testTelefoneEspacos(){
-        nome = "Marcelo";
-        sobrenome = "Fernandes";
-        telefone = "    ";
-        contato = new Contato(nome, sobrenome, telefone);
+        contato = new Contato("Marcelo", "Fernandes", "    ");
         fail("Cadastrou contato com telefone apenas com espaço");
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testNomeVazio(){
-        nome = "";
-        sobrenome = "Fernandes";
-        telefone = "12548";
-        contato = new Contato(nome, sobrenome, telefone);
+        contato = new Contato("", "Fernandes", "12548");
         fail("Cadastrou contato com nome vazio");
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testSobrenomeVazio(){
-        nome = "Marcelo";
-        sobrenome = "";
-        telefone = "12548";
-        contato = new Contato(nome, sobrenome, telefone);
+        contato = new Contato("Marcelo", "", "12548");
         fail("Cadastrou contato com sobrenome vazio");
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void testTelefoneVazio(){
-        nome = "Marcelo";
-        sobrenome = "Fernandes";
-        telefone = "";
-        contato = new Contato(nome, sobrenome, telefone);
+        contato = new Contato("Marcelo", "Fernandes", "");
         fail("Cadastrou contato com telefone vazio");
     }
     
@@ -131,7 +102,7 @@ public class ContatoTest {
     @Test
     public void testToString() {
         String result = contato.toString();
-        String expResult = "Amandio Jose - 86661543";
+        String expResult = "Joao Marcelo - 86661543";
         assertEquals(expResult, result);
     }
     

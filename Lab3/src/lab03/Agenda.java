@@ -67,8 +67,21 @@ public class Agenda {
         }
         return contatos[posicao-1].toString();
     }
-    
-    
+        
+    /**
+     * Lista todos os contatos salvos na agenda.
+     * Retorna como string a lista de contatos.
+     * @return string representando uma lista de contatos
+     */
+    public String listarContatos(){
+        String retorno = "";
+        for(int i = 0; i < 100; i++){
+            if(contatos[i] != null){
+                retorno += i+1 + " - " + contatos[i].toString() + "\n";
+            }
+        }
+        return retorno;
+    }
     
     /**
      * Verifica se dois objetos do tipo agenda são iguais.
@@ -92,6 +105,7 @@ public class Agenda {
             return false;
         }
         final Agenda other = (Agenda) obj;
+        
         //metódo deepEquals retorna verdadeiro se um par de elemento
         //nos dois arrays são profundamentes iguais.
         if (!Arrays.deepEquals(this.contatos, other.contatos)) {
@@ -99,20 +113,6 @@ public class Agenda {
         }
         return true;
     }
-    
-    
-    /**
-     * Lista todos os contatos salvos na agenda.
-     * Retorna como string a lista de contatos.
-     * @return string representando uma lista de contatos
-     */
-    public String listarContatos(){
-        String retorno = "";
-        for(int i = 0; i < 100; i++){
-            if(contatos[i] != null){
-                retorno += i+1 + " - " + contatos[i].toString() + "\n";
-            }
-        }
-        return retorno;
-    }
 }
+
+
