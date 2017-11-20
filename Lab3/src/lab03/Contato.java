@@ -22,7 +22,7 @@ public class Contato {
      * @param telefone numero de telefone
      */
     public Contato(String nome, String sobrenome, String telefone){
-        testaNome(nome, sobrenome);
+        testaNomeTelefone(nome, sobrenome, telefone);
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.telefone = telefone;
@@ -36,9 +36,9 @@ public class Contato {
      * @param nome nome do um contato
      * @param sobrenome sobrenome de um contato
      */
-    private void testaNome(String nome, String sobrenome){
+    private void testaNomeTelefone(String nome, String sobrenome, String telefone){
         if(nome == null || sobrenome == null) throw new NullPointerException();
-        if(nome.trim().equals("") || sobrenome.trim().equals("")) throw new IllegalArgumentException();
+        if(nome.trim().equals("") || sobrenome.trim().equals("") || telefone.trim().equals("")) throw new IllegalArgumentException();
     }
     
     /**
