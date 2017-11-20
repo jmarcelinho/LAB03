@@ -81,19 +81,35 @@ public class ContatoTest {
     
     @Test
     public void testEqualsNome(){
+        //testa dois contatos diferentes
         contato = new Contato("Marcelo", "Silva", "21597");
         contato2 = new Contato("Joao", "Silva", "21597");
         if(contato.equals(contato2)){
             fail("Considerou dois contatos, com nomes diferentes, como iguais");
         }
+        
+        //testa dois contatos iguais
+        contato = new Contato("Joao", "Silva", "21597");
+        contato2 = new Contato("Joao", "Silva", "21597");
+        if(!contato.equals(contato2)){
+            fail("Considerou dois contatos, com nomes iguais, como diferentes");
+        }
     }
     
     @Test
     public void testEqualsSobrenome(){
+        //testa dois contatos diferentes
         contato = new Contato("Marcelo", "Silva", "21597");
         contato2 = new Contato("Marcelo", "Fernandes", "21597");
         if(contato.equals(contato2)){
             fail("Considerou dois contatos, com sobrenomes diferentes, como iguais");
+        }
+        
+        //testa dois contatos iguais
+        contato = new Contato("Marcelo", "Silva", "21597");
+        contato2 = new Contato("Marcelo", "Silva", "21597");
+        if(!contato.equals(contato2)){
+            fail("Considerou dois contatos, com sobrenomes iguais, como diferentes");
         }
     }
     /**
