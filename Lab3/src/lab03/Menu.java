@@ -40,6 +40,7 @@ public class Menu {
             }
         }while(!opcao.equals("S"));
     }
+    
     public static void exibirMenu(){
         System.out.println("(C)adastrar contatos");
         System.out.println("(L)istar contatos");
@@ -47,6 +48,7 @@ public class Menu {
         System.out.println("(S)air");
         System.out.printf("\nOpção> ");
     }
+    
     public static void cadastraContato(Agenda agenda, Scanner sc){
         System.out.printf("Posicao: ");
         int pos = sc.nextInt();
@@ -65,9 +67,11 @@ public class Menu {
         }
         
     }
+    
     public static void listaContatos(Agenda agenda){
         System.out.println(agenda.listarContatos());
     }
+    
     public static void exibeContato(Agenda agenda, Scanner sc){
         int posicao;
         System.out.printf("Contato> ");

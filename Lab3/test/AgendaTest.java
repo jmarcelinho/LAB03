@@ -5,8 +5,6 @@
  */
 
 import lab03.Agenda;
-import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -47,6 +45,7 @@ public class AgendaTest {
         expResult = false;
         result = agenda.cadastrarContatos(posicao, nome, sobrenome, telefone);
         assertEquals(expResult, result);
+        
     }
 
     /**

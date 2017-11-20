@@ -1,5 +1,7 @@
 package lab03;
 
+import java.util.Arrays;
+
 /**
  * Representação de uma agenda de contatos.
  * A agenda tem uma capacidade máxima de 100 contatos,
@@ -31,24 +33,6 @@ public class Agenda {
     }
     
     /**
-     * Verifica se um nome e sobrenome são válidos.
-     * Um nome e sobrenome são válidos se não forem strings vazias ou 
-     * compostas apenas por espaços em branco.
-     * 
-     * @param nome nome do um contato
-     * @param sobrenome sobrenome de um contato
-     */
-    private void testaNome(String nome, String sobrenome){
-        if(nome == null || sobrenome == null) throw new NullPointerException();
-        if(nome.equals("") || sobrenome.equals("")) throw new IllegalArgumentException();
-        int cont = 0;
-        for(int i = 0; i < nome.length(); i++){
-            if(nome.charAt(i) == ' ') cont++;
-        }
-        if(cont == nome.length()) throw new IllegalArgumentException();
-    }
-    
-    /**
      * Cadastra um contato na agenda.
      * O cadastro é realizado em uma posição da agenda e para
      * o cadastro é necessário um nome, sobrenome e um numero de telefone.
@@ -65,7 +49,6 @@ public class Agenda {
      * @return true ou false
      */
     public boolean cadastrarContatos(int posicao, String nome, String sobrenome, String telefone){
-        testaNome(nome, sobrenome);
         if(posicao < 1 || posicao > 100) return false;
         this.contatos[--posicao] = new Contato(nome, sobrenome, telefone);
         return true;
@@ -84,6 +67,39 @@ public class Agenda {
         }
         return contatos[posicao-1].toString();
     }
+    
+    
+    
+    /**
+     * Verifica se dois objetos do tipo agenda são iguais.
+     * Duas Agendas são consideradas iguais se tiverem os mesmos contatos
+     * nas mesmas posições.
+     * 
+     * Retorna true caso forem iguais e false caso contrário.
+     * 
+     * @param obj objeto a ser comparado
+     * @return true ou false 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Agenda other = (Agenda) obj;
+        //metódo deepEquals retorna verdadeiro se um par de elemento
+        //nos dois arrays são profundamentes iguais.
+        if (!Arrays.deepEquals(this.contatos, other.contatos)) {
+            return false;
+        }
+        return true;
+    }
+    
     
     /**
      * Lista todos os contatos salvos na agenda.
