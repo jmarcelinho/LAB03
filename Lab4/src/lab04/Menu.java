@@ -4,43 +4,139 @@ import java.util.Scanner;
 
 
 public class Menu {
-	private static Scanner sc = new Scanner(System.in);
+	private static Scanner entrada = new Scanner(System.in);
+	private static SistemaControle sistema= new SistemaControle();
 	
 	public static void main(String[] args) {
         String opcao;
         do{
             exibirMenu();
-            
-            opcao = sc.nextLine();
+            opcao = entrada.nextLine();
             switch(opcao){
                 case "C":
-                    //cadastraContato(agenda,sc);
+                    cadastrarAluno();
                     break;
                 case "E":
-                    //exibeContato(agenda, sc);
+                    exibirAluno();
                     break;
                 case "N":
-                	//adicionaGrupo()
+                	cadastrarGrupo();
+                    break;
+                case "A":
+                	alocarAluno();
+                    break;
+                case "R":
+                	registrarAlunoResponde();
+                    break;
+                case "I":
+                	imprimirAlunoResponde();
                     break;
                 default:
-                    System.out.println("OPÇÃO INVÁLIDA!\n");
+                    System.out.println("Opcao invalida!\n");
             }
-        }while(!opcao.equals("S"));
+        }while(!opcao.equals("O"));
     }
+	
 	public static void exibirMenu(){
         System.out.println("(C)adastrar Aluno\n" + 
-        		"\n" + 
         		"(E)xibir Aluno\n" + 
-        		"\n" + 
         		"(N)ovo Grupo\n" + 
-        		"\n" + 
         		"(A)locar Aluno no Grupo e Imprimir Grupos\n" + 
-        		"\n" + 
         		"(R)egistrar Resposta de Aluno\n" + 
-        		"\n" + 
         		"(I)mprimir Alunos que Responderam\n" + 
         		"(O)ra, vamos fechar o programa!\n" + 
-        		"\n" + 
-        		"Opção>");
+        		"\n" +
+        		"Opcao>");
     }
+	public static void cadastrarAluno(){
+		try{
+			System.out.printf("Matricula: ");
+			String matricula = entrada.nextLine();
+			System.out.printf("Nome: ");
+			String nome = entrada.nextLine();
+			System.out.printf("Curso: ");
+			String curso = entrada.nextLine();
+			if(sistema.cadastrarAluno(matricula, nome, curso)){
+				System.out.println("\nCADASTRO REALIZADO!");
+			}else{
+				System.out.println("\nMATRICULA JA CADASTRADA!");
+			}
+		}catch(IllegalArgumentException e){
+			System.out.println(e.getMessage() + "\n");
+		}catch(NullPointerException e){
+			System.out.println(e.getMessage() + "\n");
+		}
+	}
+	
+	public static void exibirAluno(){
+		try{
+			System.out.printf("Matricula: ");
+			String matricula = entrada.nextLine();
+			System.out.println("\n" + sistema.consultarAluno(matricula) + "\n");
+		}catch(IllegalArgumentException e){
+			System.out.println(e.getMessage() + "\n");
+		}
+	}
+	
+	public static void cadastrarGrupo(){
+		try{
+			System.out.printf("Grupo: ");
+			String nome = entrada.nextLine();
+			if(sistema.cadastrarGrupo(nome)){
+				System.out.println("CADASTRO REALIZADO!");
+			}else{
+				System.out.println("GRUPO JA CADASTRADO!");
+			}
+		}catch(IllegalArgumentException e){
+			System.out.println(e.getMessage() + "\n");
+		}catch(NullPointerException e){
+			System.out.println(e.getMessage() + "\n");
+		}
+	}
+	
+	public static void alocarAluno(){
+		try{
+			System.out.println("(A)locar Aluno ou (I)mprimir Grupo?\n");
+			String opcao;
+			String nomeGrupo;
+			String matricula;
+			opcao = entrada.nextLine();
+			switch(opcao){
+		        case "A":
+		        	System.out.printf("Matricula: ");
+					matricula = entrada.nextLine();
+					System.out.printf("\nGrupo: ");
+					nomeGrupo = entrada.nextLine();
+		            sistema.alocarAlunoGrupo(nomeGrupo, matricula);
+		            break;
+		        case "I":
+		        	System.out.printf("Grupo: \n");
+					nomeGrupo = entrada.nextLine();
+					System.out.println(sistema.imprimirGrupo(nomeGrupo));
+		            break;
+		        default:
+		            System.out.println("Opcao invalida!\n");
+			}
+		}catch(IllegalArgumentException e){
+			System.out.println(e.getMessage() + "\n");
+		}
+    }
+	
+	public static void registrarAlunoResponde(){
+		try{
+			System.out.printf("Matricula: ");
+			String matricula = entrada.nextLine();
+			if(sistema.cadastraAlunosQuadro(matricula)){
+				System.out.println("\nALUNO REGISTRADO!");
+			}else{
+				System.out.println("\nAluno nao cadastrado!");
+			}
+		}catch(IllegalArgumentException e){
+			System.out.println(e.getMessage() + "\n");
+		}
+	}
+	
+	public static void imprimirAlunoResponde(){
+		System.out.println(sistema.AlunosRespondem());
+	}
 }

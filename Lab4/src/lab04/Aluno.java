@@ -1,5 +1,13 @@
 package lab04;
 
+
+/**
+ * Representação de um aluno da disciplina de P2.
+ * Cada aluno é representado por uma matricula, 
+ * nome e o seu curso. 
+ * @author Joao Marcelo
+ *
+ */
 public class Aluno {
 	private String matricula;
 	private String nome;
@@ -14,13 +22,13 @@ public class Aluno {
 	
 	private void testaNomes(String matricula, String nome, String curso) {
 		if(nome==null) throw new NullPointerException("NOME NULO");
-		if(nome.trim()=="") throw new IllegalArgumentException("NOME INVALIDO");
+		if(nome.trim().equals("")) throw new IllegalArgumentException("NOME INVALIDO");
 		
 		if(matricula==null) throw new NullPointerException("MATRICULA NULA");
-		if(matricula.trim()=="") throw new IllegalArgumentException("MATRICULA INVALIDA");
+		if(matricula.trim().equals("")) throw new IllegalArgumentException("MATRICULA INVALIDA");
 		
 		if(curso==null) throw new NullPointerException("CURSO NULO");
-		if(curso.trim()=="") throw new IllegalArgumentException("CURSO INVALIDO");
+		if(curso.trim().equals("")) throw new IllegalArgumentException("CURSO INVALIDO");
 	}
 	
 	public String getMatricula() {

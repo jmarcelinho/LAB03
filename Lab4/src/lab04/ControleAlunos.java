@@ -30,11 +30,10 @@ public class ControleAlunos {
 	}
 	
 	public boolean cadastrarAlunoQuadro(String matricula) {
-		if(contemAluno(matricula)) {
-			return alunosQuadro.add(alunos.get(matricula));
-			
+		if(!contemAluno(matricula)) {
+			throw new IllegalArgumentException("Aluno nao cadastrado.");
 		}
-		return false;
+		return alunosQuadro.add(alunos.get(matricula));
 	}
 	
 	public boolean contemAluno(String matricula){

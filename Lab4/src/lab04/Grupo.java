@@ -9,7 +9,7 @@ public class Grupo {
 	
 	public Grupo(String nome) {
 		if(nome==null) throw new NullPointerException("NOME NULO");
-		if(nome.trim()=="") throw new IllegalArgumentException("NOME INVALIDO");
+		if(nome.trim().equals("")) throw new IllegalArgumentException("NOME INVALIDO");
 		this.nome = nome;
 		this.alunos = new HashSet <>();
 	}
@@ -17,7 +17,6 @@ public class Grupo {
 	public boolean adicionarAluno(Aluno aluno) {
 		return alunos.add(aluno);
 	}
-	
 	
 	public String getNome() {
 		return nome;
@@ -63,7 +62,5 @@ public class Grupo {
 		return ret;
 		
 	}
-	
-	
 	
 }
