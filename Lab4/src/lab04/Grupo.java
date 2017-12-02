@@ -1,6 +1,7 @@
 package lab04;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class Grupo {
 	private String nome;
@@ -54,7 +55,13 @@ public class Grupo {
 
 	@Override
 	public String toString() {
-		return nome;
+		String ret  = "Alunos do grupo " + this.nome + " :\n";
+		Iterator <Aluno> it = alunos.iterator();
+		while(it.hasNext()){
+			ret+= "* " + it.next().toString();
+		}
+		return ret;
+		
 	}
 	
 	
