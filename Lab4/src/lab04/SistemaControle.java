@@ -1,6 +1,7 @@
 package lab04;
 
 public class SistemaControle {
+	
 	private ControleGrupos controleGrupo;
 	private ControleAlunos controleAluno;
 	

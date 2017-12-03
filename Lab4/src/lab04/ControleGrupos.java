@@ -2,9 +2,17 @@ package lab04;
 
 import java.util.HashMap;
 
-
+/**
+ * Representação de um sistema para controle
+ * de grupos de estudo.
+ * No sistem nao podem ser cadastrados grupos com o mesmo
+ * nome.
+ * @author Joao Marcelo
+ *
+ */
 public class ControleGrupos {
 	private HashMap <String, Grupo> grupos;
+	
 	
 	public ControleGrupos() {
 		this.grupos = new HashMap<>();

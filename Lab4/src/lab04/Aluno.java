@@ -2,17 +2,21 @@ package lab04;
 
 
 /**
- * Representação de um aluno da disciplina de P2.
+ * Representação de um aluno.
  * Cada aluno é representado por uma matricula, 
- * nome e o seu curso. 
+ * nome e curso. 
+ * 
  * @author Joao Marcelo
- *
  */
 public class Aluno {
 	private String matricula;
 	private String nome;
 	private String curso;
 	
+	/**
+	 * Constrói um aluno a partir de sua matricula, nome
+	 * e curso.
+	 */
 	public Aluno(String matricula, String nome, String curso) {
 		testaNomes(matricula, nome, curso);
 		this.matricula = matricula;
@@ -31,14 +35,26 @@ public class Aluno {
 		if(curso.trim().equals("")) throw new IllegalArgumentException("CURSO INVALIDO");
 	}
 	
+	/**
+	 * Retorna uma String representando a matricula do aluno.
+	 * @return Representação e String da matricula do aluno.
+	 */
 	public String getMatricula() {
 		return matricula;
 	}
 	
+	/**
+	 * Retorna uma String representando o nome do aluno.
+	 * @return Representação em String do do aluno.
+	 */
 	public String getNome() {
 		return nome;
 	}
 	
+	/**
+	 * Retorna uma String representando o curso do aluno.
+	 * @return Representação em String do curso do aluno.
+	 */
 	public String getCurso() {
 		return curso;
 	}
@@ -52,7 +68,14 @@ public class Aluno {
 		return result;
 	}
 
-	@Override
+	/**
+	 * Verifica se outro objeto eh igual a este objeto aluno.
+	 * Dois alunos sao comparados iguais se
+	 * possuirem a mesma matricula.
+	 * 
+	 * @return True se forem iguais e False
+	 * caso contrario.
+	 */
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -73,8 +96,14 @@ public class Aluno {
 		}
 		return true;
 	}
-
-	@Override
+	
+	/**
+	 * Retorna uma representação em String do aluno.
+	 * A representação é no formato
+	 * MATRICULA - NOME - CURSO
+	 * 
+	 * @return String representando um aluno.
+	 */
 	public String toString() {
 		return this.matricula + " - " + this.nome + " - " + this.curso;
 	}
