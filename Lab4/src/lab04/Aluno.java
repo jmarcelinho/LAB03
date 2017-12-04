@@ -2,8 +2,8 @@ package lab04;
 
 
 /**
- * Representação de um aluno.
- * Cada aluno é representado por uma matricula, 
+ * Representacaoo de um aluno.
+ * Cada aluno e representado por uma matricula, 
  * nome e curso. 
  * 
  * @author Joao Marcelo
@@ -14,14 +14,14 @@ public class Aluno {
 	private String curso;
 	
 	/**
-	 * Constrói um aluno a partir de sua matricula, nome
+	 * Constroi um aluno a partir de sua matricula, nome
 	 * e curso.
 	 */
 	public Aluno(String matricula, String nome, String curso) {
 		testaNomes(matricula, nome, curso);
-		this.matricula = matricula;
-		this.nome = nome;
-		this.curso = curso;
+		this.matricula = matricula.trim();
+		this.nome = nome.trim();
+		this.curso = curso.trim();
 	}
 	
 	private void testaNomes(String matricula, String nome, String curso) {
@@ -37,7 +37,7 @@ public class Aluno {
 	
 	/**
 	 * Retorna uma String representando a matricula do aluno.
-	 * @return Representação e String da matricula do aluno.
+	 * @return Representacao e String da matricula do aluno.
 	 */
 	public String getMatricula() {
 		return matricula;
@@ -45,7 +45,7 @@ public class Aluno {
 	
 	/**
 	 * Retorna uma String representando o nome do aluno.
-	 * @return Representação em String do do aluno.
+	 * @return Representacao em String do do aluno.
 	 */
 	public String getNome() {
 		return nome;
@@ -53,7 +53,7 @@ public class Aluno {
 	
 	/**
 	 * Retorna uma String representando o curso do aluno.
-	 * @return Representação em String do curso do aluno.
+	 * @return Representacao em String do curso do aluno.
 	 */
 	public String getCurso() {
 		return curso;
@@ -98,8 +98,8 @@ public class Aluno {
 	}
 	
 	/**
-	 * Retorna uma representação em String do aluno.
-	 * A representação é no formato
+	 * Retorna uma representacao em String do aluno.
+	 * A representacao eh no formato
 	 * MATRICULA - NOME - CURSO
 	 * 
 	 * @return String representando um aluno.

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 /**
- * Representação de um grupo de estudos.
+ * Representaï¿½ï¿½o de um grupo de estudos.
  * Um grupo eh representando por um nome
  * e eh formado por um conjunto de alunos.
  * @author Joao Marcelo
@@ -15,24 +15,24 @@ public class Grupo {
 	private HashSet <Aluno> alunos;
 	
 	/**
-	 * Constrói um grupo a partir de um nome.
-	 * Um grupo começa sem nenhum aluno.
+	 * Constrï¿½i um grupo a partir de um nome.
+	 * Um grupo comeï¿½a sem nenhum aluno.
 	 * @param nome Nome do grupo a ser criado.
 	 */
 	public Grupo(String nome) {
 		if(nome==null) throw new NullPointerException("NOME NULO.");
 		if(nome.trim().equals("")) throw new IllegalArgumentException("NOME INVALIDO.");
-		this.nome = nome;
+		this.nome = nome.trim();
 		this.alunos = new HashSet <>();
 	}
 	
 	/**
 	 * Adiciona um aluno ao grupo.
 	 * Retorna True se o aluno for adicionado com sucesso
-	 * e False caso algum erro ocorra e o aluno não for adicionado.
+	 * e False caso algum erro ocorra e o aluno nï¿½o for adicionado.
 	 * @param aluno Objeto aluno que representa um aluno.
 	 * @return True se o aluno for adicionado e False caso
-	 * contrário.
+	 * contrï¿½rio.
 	 */
 	public boolean adicionarAluno(Aluno aluno) {
 		return alunos.add(aluno);
@@ -61,7 +61,7 @@ public class Grupo {
 	 * Retorna True se objeto eh um grupo e se possuirem 
 	 * o mesmo nome. De outra forma retorna False.
 	 * @return True se os objetos forem iguais e False
-	 * caso contrário.
+	 * caso contrï¿½rio.
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -86,7 +86,7 @@ public class Grupo {
 	}
 	
 	/**
-	 * Retorna uma representação em String de um grupo.
+	 * Retorna uma representaï¿½ï¿½o em String de um grupo.
 	 * O grupo eh representado por seu nome e uma lista
 	 * de alunos do grupo.
 	 * @return Uma string representa um grupo.
