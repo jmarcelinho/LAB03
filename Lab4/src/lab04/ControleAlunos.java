@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 /**
- * Representação de um sistema para controle de alunos.
+ * Representacao de um sistema para controle de alunos.
  * O controle de alunos contem diversos alunos.
  * Nao eh permtido o cadastro de alunos com a mesma matricula.
  * Possui tambem uma lista que armazena quais
@@ -28,13 +28,13 @@ public class ControleAlunos {
 	
 	/**
 	 * Cadastra um aluno no sistema a partir da sua matricula, nome e curso.
-	 * Retorna True se o aluno foi cadastrado com sucesso. Caso contrário
+	 * Retorna True se o aluno foi cadastrado com sucesso. Caso contrario
 	 * o retorno eh False.
 	 * @param matricula matricula do aluno 
 	 * @param nome nome do aluno
 	 * @param curso curso do aluno
 	 * @return True se o cadastro for realizado com sucesso e False caso
-	 * contrário.
+	 * contrario.
 	 */
 	public boolean cadastrarAluno(String matricula, String nome, String curso) {
 		if(contemAluno(matricula)) {
@@ -46,7 +46,7 @@ public class ControleAlunos {
 	
 	/**
 	 * Pesquisa um aluno no sistema partir da sua matricula
-	 * e retorna uma representaçao em string desse aluno.
+	 * e retorna uma representacao em string desse aluno.
 	 * Caso a matricula nao esteja cadastrada uma excecao
 	 * eh lancada informando o problema.
 	 * @param matricula matricula do aluno pesquisado.
@@ -60,12 +60,12 @@ public class ControleAlunos {
 	}
 	
 	/**
-	 * Cadastra um aluno presente no sistemana lista dos 
+	 * Cadastra um aluno presente no sistema na lista dos 
 	 * que respondem atividades no quadro.
 	 * O aluno eh adicionado informando a sua matricula ao sistema.
 	 * @param matricula matricula do aluno a ser adicionado.
 	 * @return True se o cadastro foi realizado e False 
-	 * caso contrário.
+	 * caso contrario.
 	 */
 	public boolean cadastrarAlunoQuadro(String matricula) {
 		if(!contemAluno(matricula)) {
