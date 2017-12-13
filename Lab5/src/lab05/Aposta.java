@@ -15,6 +15,7 @@ public class Aposta {
 	public double getValor() {
 		return this.valorAposta;
 	}
+	
 	public String toString() {
 		return this.nomeApostador + " - R$" + this.valorAposta + " - " + this.previsao;
 	}
