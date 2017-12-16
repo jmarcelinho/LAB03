@@ -3,7 +3,20 @@ package lab05;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
+/**
+ * Representa um cenario para uma aposta.
+ * Um cenario eh algo que pode acontecer ou nao.
+ * 
+ * Cada cenario possui uma descricao e um estado
+ * que informa se o cenario foi finalizado ou nao
+ * e se finalizado se ocorreu ou nao ocorreu.
+ * 
+ * O cenario tambem possui uma lista de apostas
+ * que foram feitas para tal cenario.
+ * 
+ * @author Joao Marcelo
+ *
+ */
 public class Cenario {
 	private String descricao;
 	private Estado estado;
@@ -11,7 +24,15 @@ public class Cenario {
 	private double soma_nao_ocorre;
 	private ArrayList <Aposta> apostas;
 	
+	/**
+	 * Cria o cenario a partir de uma descricao.
+	 * Inicialmente o cenario nao possui nenhuma aposta.
+	 * 
+	 * @param descricao descricao de um cenario.
+	 */
 	public Cenario(String descricao) {
+		if(descricao==null) throw new NullPointerException("NOME NULO");
+		if(descricao.trim().equals("")) throw new IllegalArgumentException("NOME INVALIDO");
 		this.descricao = descricao;
 		this.estado = Estado.NAO_FINALIZADO;
 		apostas = new ArrayList<>();
@@ -19,7 +40,15 @@ public class Cenario {
 		this.soma_nao_ocorre = 0;
 	}
 	
-	public void cadastrarApostas(String nomeApostador, double valorAposta, Previsao previsao) {
+	/**
+	 * Cadastra apostas no cenario.
+	 * Uma aposta eh cadastrada a partir do nome de um 
+	 * apostador, o valor da aposta e a previsao para aposta.
+	 * @param nomeApostador nome do apostador.
+	 * @param valorAposta valor da aposta.
+	 * @param previsao previsao da aposta.
+	 */
+	public void cadastrarApostas(String nomeApostador, int valorAposta, Previsao previsao) {
 		apostas.add(new Aposta(nomeApostador, valorAposta, previsao));
 		if(previsao.equals(Previsao.VAI_ACONTECER)) {
 			soma_ocorre+=valorAposta;
@@ -28,27 +57,72 @@ public class Cenario {
 		}
 	}
 	
-	public double fecharCenario(Estado e) {
-		this.estado = e;
-		if(e.equals(Estado.FINALIZADO_OCORREU)) {
+	/**
+	 * Fecha o cenario a partir da informacao se o mesmo
+	 * ocorreu ou nao ocorreu.
+	 * @param estado que informa se ocorreu ou nao ocorreu.
+	 */
+	public void fecharCenario(Estado e) {
+		if(this.estado.equals(Estado.NAO_FINALIZADO)){
+			this.estado = e;
+		}else {
+			throw new IllegalArgumentException("Cenario ja finalizado");
+		}
+		
+	}
+	
+	/**
+	 * Retorna a soma de todas as apostas perdedoras.
+	 * @return soma das apostas perdedoras.
+	 */
+	public double getSomaPerdedoras() {
+		if(this.estado.equals(Estado.NAO_FINALIZADO))
+			throw new IllegalArgumentException("Cenario nao finalizado");
+		if(this.estado.equals(Estado.FINALIZADO_OCORREU)) {
 			return soma_nao_ocorre;
 		}
 		return soma_ocorre;
 	}
 	
+	/**
+	 * Retorna as representacoes em string das 
+	 * apostas cadastradas no cenario.
+	 * 
+	 * @return representacoes em string das apostas no cenario.
+	 */
 	public String listarApostas() {
 		Iterator <Aposta> it = apostas.iterator();
 		String res = "";
 		while(it.hasNext()){
-			res+=it.next().toString();
+			res+=it.next().toString() + "\n";
 		}
 		return res;
 	}
 	
+	public int numeroApostas() {
+		return apostas.size();
+	}
+	
+	public int valorApostas() {
+		return (int) (soma_ocorre + soma_nao_ocorre); 
+	}
+	
+	/**
+	 * Retorna uma string com 
+	 * a descricao do cenario.
+	 * @return descricao do cenario.
+	 */
 	public String getDescricao() {
 		return this.descricao;
 	}
 	
+	/**
+	 * Retorna uma representacao do cenario.
+	 * A representacao do cenario eh no formato 
+	 * descricao - estado (finalizado ou nao finalizado).
+	 * 
+	 * @return representacao em string do cenario.
+	 */
 	public String toString() {
 		return descricao + " - " + estado;
 	}
