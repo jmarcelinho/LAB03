@@ -24,6 +24,8 @@ public class ControllerCenario {
 	 * @param porcentagem porcentagem de retirada para o caixa.
 	 */
 	public ControllerCenario(int valorCaixa, double porcentagem) {
+		if(valorCaixa<=0) throw new IllegalArgumentException("Valor de caixa invalido");
+		if(porcentagem<=0) throw new IllegalArgumentException("Porcentagem invalida");
 		this.cenarios = new ArrayList<>();
 		this.caixa = valorCaixa;
 		this.porcentagemRetirada = porcentagem;
