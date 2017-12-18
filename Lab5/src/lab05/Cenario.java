@@ -124,6 +124,6 @@ public class Cenario {
 	 * @return representacao em string do cenario.
 	 */
 	public String toString() {
-		return descricao + " - " + estado;
+		return descricao + " - " + estado.getEstado();
 	}
 }

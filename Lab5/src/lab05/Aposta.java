@@ -21,14 +21,17 @@ public class Aposta {
 	 * @param previsao previsao da aposta.
 	 */
 	public Aposta(String nomeApostador, double valorAposta, Previsao previsao) {
-		if(nomeApostador==null) throw new NullPointerException("NOME NULO");
-		if(nomeApostador.trim().equals("")) throw new IllegalArgumentException("NOME INVALIDO");
-		
+		isValid(nomeApostador,valorAposta);
 		this.nomeApostador = nomeApostador;
 		this.valorAposta = valorAposta;
 		this.previsao = previsao;
 	}
 	
+	private void isValid(String nomeApostador, double valorAposta) {
+		if(nomeApostador==null) throw new NullPointerException("Nome nulo");
+		if(nomeApostador.trim().equals("")) throw new IllegalArgumentException("Nome Invalido");
+		if(valorAposta<=0) throw new IllegalArgumentException("Valor de aposta invalido");
+	}
 	/**
 	 * Retorna um double representando o  valor da aposta.
 	 * @return valor da aposta.
@@ -46,6 +49,6 @@ public class Aposta {
 	 * @return representacao em string da aposta.
 	 */
 	public String toString() {
-		return this.nomeApostador + " - R$" + this.valorAposta + " - " + this.previsao;
+		return this.nomeApostador + " - R$" + this.valorAposta + " - " + this.previsao.getPrevisao();
 	}
 }
