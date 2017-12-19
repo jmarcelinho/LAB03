@@ -31,8 +31,8 @@ public class Cenario {
 	 * @param descricao descricao de um cenario.
 	 */
 	public Cenario(String descricao) {
-		if(descricao==null) throw new NullPointerException("NOME NULO");
-		if(descricao.trim().equals("")) throw new IllegalArgumentException("NOME INVALIDO");
+		if(descricao==null) throw new NullPointerException("Erro no cadastro de cenario: Descricao nao pode ser vazia");
+		if(descricao.trim().equals("")) throw new IllegalArgumentException("Erro no cadastro de cenario: Descricao nao pode ser vazia");
 		this.descricao = descricao;
 		this.estado = Estado.NAO_FINALIZADO;
 		apostas = new ArrayList<>();
@@ -48,7 +48,7 @@ public class Cenario {
 	 * @param valorAposta valor da aposta.
 	 * @param previsao previsao da aposta.
 	 */
-	public void cadastrarApostas(String nomeApostador, int valorAposta, Previsao previsao) {
+	public void cadastrarAposta(String nomeApostador, int valorAposta, Previsao previsao) {
 		apostas.add(new Aposta(nomeApostador, valorAposta, previsao));
 		if(previsao.equals(Previsao.VAI_ACONTECER)) {
 			soma_ocorre+=valorAposta;

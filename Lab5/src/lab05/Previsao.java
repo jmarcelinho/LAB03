@@ -1,7 +1,7 @@
 package lab05;
 
 public enum Previsao {
-	VAI_ACONTECER("Vai acontecer"), NAO_VAI_ACONTECER("Nao vai acontecer");
+	VAI_ACONTECER("VAI ACONTECER"), NAO_VAI_ACONTECER("N VAI ACONTECER");
 	
 	private String previsao;
 	

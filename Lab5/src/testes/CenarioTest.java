@@ -29,12 +29,12 @@ public class CenarioTest {
 	
 	@Test(expected = NullPointerException.class)
 	public void cadastraApostaComNomeNullTest() {
-		cenario.cadastrarApostas(null, 200, Previsao.VAI_ACONTECER);
+		cenario.cadastrarAposta(null, 200, Previsao.VAI_ACONTECER);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void cadastraApostaComNomeVazioTest() {
-		cenario.cadastrarApostas("       ", 2000, Previsao.NAO_VAI_ACONTECER);
+		cenario.cadastrarAposta("       ", 2000, Previsao.NAO_VAI_ACONTECER);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -45,8 +45,8 @@ public class CenarioTest {
 	
 	@Test
 	public void getApostasPerdedorasTest() {
-		cenario.cadastrarApostas("Jose", 200, Previsao.VAI_ACONTECER);
-		cenario.cadastrarApostas("Joao", 500, Previsao.NAO_VAI_ACONTECER);
+		cenario.cadastrarAposta("Jose", 200, Previsao.VAI_ACONTECER);
+		cenario.cadastrarAposta("Joao", 500, Previsao.NAO_VAI_ACONTECER);
 		int expected = 500;
 		cenario.fecharCenario(Estado.FINALIZADO_OCORREU);
 		assertEquals(expected, (int)cenario.getSomaPerdedoras());
@@ -59,8 +59,8 @@ public class CenarioTest {
 	
 	@Test
 	public void listarApostasTest() {
-		cenario.cadastrarApostas("Jose", 200, Previsao.VAI_ACONTECER);
-		cenario.cadastrarApostas("Joao", 500, Previsao.NAO_VAI_ACONTECER);
+		cenario.cadastrarAposta("Jose", 200, Previsao.VAI_ACONTECER);
+		cenario.cadastrarAposta("Joao", 500, Previsao.NAO_VAI_ACONTECER);
 		String expected = "Jose - R$200.0 - Vai acontecer\n" +
 						"Joao - R$500.0 - Nao vai acontecer\n";
 		assertEquals(expected, cenario.listarApostas());
@@ -68,15 +68,15 @@ public class CenarioTest {
 	
 	@Test
 	public void numeroApostasTest() {
-		cenario.cadastrarApostas("Jose", 200, Previsao.VAI_ACONTECER);
-		cenario.cadastrarApostas("Joao", 500, Previsao.NAO_VAI_ACONTECER);
+		cenario.cadastrarAposta("Jose", 200, Previsao.VAI_ACONTECER);
+		cenario.cadastrarAposta("Joao", 500, Previsao.NAO_VAI_ACONTECER);
 		assertEquals(2, cenario.numeroApostas());
 	}
 	
 	@Test
 	public void valorApostasCenarioTest() {
-		cenario.cadastrarApostas("Jose", 200, Previsao.VAI_ACONTECER);
-		cenario.cadastrarApostas("Joao", 500, Previsao.NAO_VAI_ACONTECER);
+		cenario.cadastrarAposta("Jose", 200, Previsao.VAI_ACONTECER);
+		cenario.cadastrarAposta("Joao", 500, Previsao.NAO_VAI_ACONTECER);
 		assertEquals(700, cenario.valorApostas());
 	}
 	

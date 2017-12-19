@@ -24,8 +24,8 @@ public class ControllerCenario {
 	 * @param porcentagem porcentagem de retirada para o caixa.
 	 */
 	public ControllerCenario(int valorCaixa, double porcentagem) {
-		if(valorCaixa<=0) throw new IllegalArgumentException("Valor de caixa invalido");
-		if(porcentagem<=0) throw new IllegalArgumentException("Porcentagem invalida");
+		if(valorCaixa<0) throw new IllegalArgumentException("Erro na inicializacao: Caixa nao pode ser inferior a 0");
+		if(porcentagem<0) throw new IllegalArgumentException("Erro na inicializacao: Taxa nao pode ser inferior a 0");
 		this.cenarios = new ArrayList<>();
 		this.caixa = valorCaixa;
 		this.porcentagemRetirada = porcentagem;
@@ -47,8 +47,11 @@ public class ControllerCenario {
 	 * @param cenario numeracao de um cenario.
 	 */
 	private void isValid(int cenario) {
-		if(cenario < 0 || cenario>=cenarios.size()) 
-			throw new IllegalArgumentException("Cenario Invalido");
+		if(cenario < 0) 
+			throw new IllegalArgumentException("Erro na consulta de cenario: Cenario invalido");
+		else if(cenario >=cenarios.size()){
+			throw new IllegalArgumentException("Erro na consulta de cenario: Cenario nao cadastrado");
+		}
 	}
 	
 	/**
@@ -174,7 +177,7 @@ public class ControllerCenario {
 	 */
 	public void cadastrarAposta(int cenario, String apostador, int valor, Previsao previsao) {
 		isValid(--cenario);
-		cenarios.get(cenario).cadastrarApostas(apostador, valor, previsao);
+		cenarios.get(cenario).cadastrarAposta(apostador, valor, previsao);
 	}
 	
 	/**
