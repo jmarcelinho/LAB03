@@ -48,12 +48,12 @@ public class Cenario {
 	 * @param valorAposta valor da aposta.
 	 * @param previsao previsao da aposta.
 	 */
-	public void cadastrarAposta(String nomeApostador, int valorAposta, Previsao previsao) {
+	public void cadastrarAposta(String nomeApostador, int valorAposta, String previsao) {
 		apostas.add(new Aposta(nomeApostador, valorAposta, previsao));
-		if(previsao.equals(Previsao.VAI_ACONTECER)) {
-			soma_ocorre+=valorAposta;
+		if(previsao.equals("VAI ACONTECER")) {
+			soma_ocorre += valorAposta;
 		}else {
-			soma_nao_ocorre+=valorAposta;
+			soma_nao_ocorre += valorAposta;
 		}
 	}
 	
@@ -66,7 +66,7 @@ public class Cenario {
 		if(this.estado.equals(Estado.NAO_FINALIZADO)){
 			this.estado = e;
 		}else {
-			throw new IllegalArgumentException("Cenario ja finalizado");
+			throw new IllegalArgumentException("Erro ao fechar aposta: Cenario ja esta fechado");
 		}
 		
 	}
@@ -75,13 +75,13 @@ public class Cenario {
 	 * Retorna a soma de todas as apostas perdedoras.
 	 * @return soma das apostas perdedoras.
 	 */
-	public double getSomaPerdedoras() {
+	public int getSomaPerdedoras() {
 		if(this.estado.equals(Estado.NAO_FINALIZADO))
-			throw new IllegalArgumentException("Cenario nao finalizado");
+			return -1;
 		if(this.estado.equals(Estado.FINALIZADO_OCORREU)) {
-			return soma_nao_ocorre;
+			return (int)soma_nao_ocorre;
 		}
-		return soma_ocorre;
+		return (int)soma_ocorre;
 	}
 	
 	/**

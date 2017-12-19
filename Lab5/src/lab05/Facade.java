@@ -6,15 +6,13 @@ public class Facade {
 	private ControllerCenario controleCenarios;
 	
 	public Facade() {
-		controleCenarios = new ControllerCenario(0, 0.1);
+		controleCenarios = new ControllerCenario(100000, 0.01);
 	}
 	
 	public static void main(String[] args) {
-		String [] args1 = new String[] {"lab05.Facade", "acceptance_test/us1_test.txt"};
-		String [] args2 = new String[] {"lab05.Facade", "acceptance_test/us2_test.txt"};
-		String [] args3 = new String[] {"lab05.Facade", "acceptance_test/us3_test.txt"};
+		args = new String[] {"lab05.Facade", "acceptance_test/eu.txt"};
 		//EasyAccept.main(args1);
-		EasyAccept.main(args3);
+		EasyAccept.main(args);
 	}
 	public void inicializa(int caixa, double porcentagem) {
 		this.controleCenarios = new ControllerCenario(caixa, porcentagem);
@@ -37,10 +35,7 @@ public class Facade {
 	}
 	
 	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) {
-		Previsao previsao2;
-		if(previsao.equals("N VAI ACONTECER")) previsao2 = Previsao.NAO_VAI_ACONTECER;
-		else previsao2 = Previsao.VAI_ACONTECER;
-		this.controleCenarios.cadastrarAposta(cenario, apostador, valor, previsao2);
+		this.controleCenarios.cadastrarAposta(cenario, apostador, valor, previsao);
 	}
 	
 	public int valorTotalDeApostas(int cenario) {
