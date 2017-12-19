@@ -89,7 +89,7 @@ public class ControllerCenario {
 		String res = "";
 		int index = 1;
 		while(it.hasNext()){
-			res+= index + " - " + it.next().toString();
+			res+= index++ + " - " + it.next().toString() + "\n";
 		}
 		return res;
 	}

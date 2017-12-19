@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import lab05.ControllerCenario;
+import lab05.Previsao;
 
 public class ControllerCenarioTest {
 	ControllerCenario controleCenario;
@@ -54,12 +55,12 @@ public class ControllerCenarioTest {
 		assertEquals(expected, controleCenario.exibirCenario(2));
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void exibirCenariosTest() {
 		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
 		controleCenario.cadastrarCenario("Todos os alunos vao ser reprovados");
 		String expected = "1 - Todos os alunos vao ser aprovados - Nao finalizado\n"
-				+"2 - Todos os alunos vao ser reprovados - Nao finalizado\n" ;
+				+ "2 - Todos os alunos vao ser reprovados - Nao finalizado\n" ;
 		assertEquals(expected, controleCenario.exibirCenarios());
 	}
 	
@@ -77,4 +78,107 @@ public class ControllerCenarioTest {
 		//tentando fechar o mesmo cenario
 		controleCenario.fecharCenario(1, true); 
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void cadastrarApostaTestNumeracaoInvalidaTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleCenario.cadastrarAposta(2, "Brito", 200, Previsao.NAO_VAI_ACONTECER);
+	}
+	
+	@Test
+	public void totalDeApostasTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleCenario.cadastrarAposta(1, "Brito", 200, Previsao.NAO_VAI_ACONTECER);
+		controleCenario.cadastrarAposta(1, "Mateus", 200, Previsao.VAI_ACONTECER);
+		int expected = 2;
+		assertEquals(expected, controleCenario.totalDeApostas(1));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void totalDeApostasCenarioInvalidoTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleCenario.cadastrarAposta(1, "Brito", 200, Previsao.NAO_VAI_ACONTECER);
+		controleCenario.cadastrarAposta(1, "Mateus", 200, Previsao.VAI_ACONTECER);
+		int expected = 2;
+		assertEquals(expected, controleCenario.totalDeApostas(2));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void valorTotalDeApostasCenarioInvalidoTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleCenario.cadastrarAposta(1, "Brito", 200, Previsao.NAO_VAI_ACONTECER);
+		controleCenario.cadastrarAposta(1, "Mateus", 200, Previsao.VAI_ACONTECER);
+		int expected = 2;
+		assertEquals(expected, controleCenario.valorTotalDeApostas(2));
+	}
+	
+	@Test
+	public void valorTotalDeApostasTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleCenario.cadastrarAposta(1, "Brito", 200, Previsao.NAO_VAI_ACONTECER);
+		controleCenario.cadastrarAposta(1, "Mateus", 200, Previsao.VAI_ACONTECER);
+		int expected = 400;
+		assertEquals(expected, controleCenario.valorTotalDeApostas(1));
+	}
+	
+	@Test
+	public void getcaixaCenarioTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleCenario.cadastrarAposta(1, "Francisco Cisco", 200, Previsao.VAI_ACONTECER);
+		controleCenario.cadastrarAposta(1, "Brito", 200, Previsao.NAO_VAI_ACONTECER);
+		controleCenario.fecharCenario(1, true);
+		int expected = 2;
+		assertEquals(expected, controleCenario.getCaixaCenario(1));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void getcaixaCenarioNumeracaoInvalidaTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleCenario.cadastrarAposta(1, "Francisco Cisco", 200, Previsao.VAI_ACONTECER);
+		controleCenario.cadastrarAposta(1, "Brito", 200, Previsao.NAO_VAI_ACONTECER);
+		controleCenario.fecharCenario(1, true);
+		int expected = 2;
+		assertEquals(expected, controleCenario.getCaixaCenario(2));
+	}
+	
+	@Test
+	public void getTotalRateioTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleCenario.cadastrarAposta(1, "Francisco Cisco", 200, Previsao.VAI_ACONTECER);
+		controleCenario.cadastrarAposta(1, "Brito", 200, Previsao.NAO_VAI_ACONTECER);
+		controleCenario.fecharCenario(1, true);
+		int expected = 198;
+		assertEquals(expected, controleCenario.getTotalRateio(1));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void getTotalRateioNumeracaoInvalidaTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleCenario.cadastrarAposta(1, "Francisco Cisco", 200, Previsao.VAI_ACONTECER);
+		controleCenario.cadastrarAposta(1, "Brito", 200, Previsao.NAO_VAI_ACONTECER);
+		controleCenario.fecharCenario(1, true);
+		int expected = 198;
+		assertEquals(expected, controleCenario.getTotalRateio(2));
+	}
+	
+	@Test
+	public void exibeApostasTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleCenario.cadastrarAposta(1, "Francisco Cisco", 200, Previsao.VAI_ACONTECER);
+		controleCenario.cadastrarAposta(1, "Brito", 200, Previsao.NAO_VAI_ACONTECER);
+		String expected = "Francisco Cisco - R$200.0 - Vai acontecer\n"
+				+ "Brito - R$200.0 - Nao vai acontecer\n";
+		assertEquals(expected, controleCenario.exibeApostas(1));
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void exibeApostasNumeracaoInvalidaTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleCenario.cadastrarAposta(1, "Francisco Cisco", 200, Previsao.VAI_ACONTECER);
+		controleCenario.cadastrarAposta(1, "Brito", 200, Previsao.NAO_VAI_ACONTECER);
+		String expected = "Francisco Cisco - R$200 - Vai acontecer\n"
+				+ "Brito - R$200 - Nao vai acontecer\n";
+		assertEquals(expected, controleCenario.exibeApostas(2));
+	}
+	
+	
 }
