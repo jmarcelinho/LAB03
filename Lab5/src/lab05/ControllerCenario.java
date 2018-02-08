@@ -67,6 +67,20 @@ public class ControllerCenario {
 	}
 	
 	/**
+	 * Cadastra cenario no sistema a partir
+	 * de uma descricao e o bonus e
+	 * retorna a numeracao
+	 * dada pelo sistema ao cenario.
+	 * @param descricao descricao do sistema.
+	 * @return numeracao do sistema cadastrado.
+	 */
+	public int cadastrarCenario(String descricao, int bonus) {
+		cenarios.add(new CenarioBonus(descricao, bonus));
+		this.caixa -= bonus;
+		return cenarios.size();
+	}
+	
+	/**
 	 * Retorna uma string representando um cenario
 	 * pesquisado a partir da sua numeracao.
 	 * 

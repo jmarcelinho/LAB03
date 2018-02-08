@@ -18,11 +18,11 @@ import java.util.Iterator;
  *
  */
 public class Cenario {
-	private String descricao;
-	private Estado estado;
-	private double soma_ocorre;
-	private double soma_nao_ocorre;
-	private ArrayList <Aposta> apostas;
+	protected String descricao;
+	protected Estado estado;
+	protected double soma_ocorre;
+	protected double soma_nao_ocorre;
+	protected ArrayList <Aposta> apostas;
 	
 	/**
 	 * Cria o cenario a partir de uma descricao.
