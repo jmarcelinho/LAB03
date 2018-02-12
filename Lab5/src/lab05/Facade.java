@@ -10,8 +10,10 @@ public class Facade {
 	}
 	
 	public static void main(String[] args) {
-		args = new String[] {"lab05.Facade", "acceptance_test/eu.txt"};
-		//EasyAccept.main(args1);
+		args = new String[] {"lab05.Facade", "acceptance_test/us1_test.txt", 
+				"acceptance_test/us2_test.txt",
+				"acceptance_test/us3_test.txt",
+				"acceptance_test/us4_test.txt"};
 		EasyAccept.main(args);
 	}
 	public void inicializa(int caixa, double porcentagem) {
