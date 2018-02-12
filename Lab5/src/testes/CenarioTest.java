@@ -28,12 +28,12 @@ public class CenarioTest {
 	
 	@Test(expected = NullPointerException.class)
 	public void cadastraApostaComNomeNullTest() {
-		cenario.cadastrarAposta(null, 200, "VAI ACONTECER");
+		cenario.cadastrarAposta(1, null, 200, "VAI ACONTECER");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void cadastraApostaComNomeVazioTest() {
-		cenario.cadastrarAposta("       ", 2000, "N VAI ACONTECER");
+		cenario.cadastrarAposta(1, "       ", 2000, "N VAI ACONTECER");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -44,8 +44,8 @@ public class CenarioTest {
 	
 	@Test
 	public void getApostasPerdedorasTest() {
-		cenario.cadastrarAposta("Jose", 200, "VAI ACONTECER");
-		cenario.cadastrarAposta("Joao", 500, "N VAI ACONTECER");
+		cenario.cadastrarAposta(1, "Jose", 200, "VAI ACONTECER");
+		cenario.cadastrarAposta(1, "Joao", 500, "N VAI ACONTECER");
 		int expected = 500;
 		cenario.fecharCenario(Estado.FINALIZADO_OCORREU);
 		assertEquals(expected, (int)cenario.getSomaPerdedoras());

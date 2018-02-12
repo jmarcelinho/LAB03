@@ -12,27 +12,27 @@ public class ApostaTest {
 	private Aposta aposta;
 	@Before
 	public void setUp(){
-		aposta = new Aposta("Joao", 200, "VAI ACONTECER");
+		aposta = new Aposta(1, "Joao", 200, "VAI ACONTECER");
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void apostaNomeNullTest() {
-		aposta = new Aposta(null, 200, "N VAI ACONTECER");
+		aposta = new Aposta(1, null, 200, "N VAI ACONTECER");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void apostaNomeVazioTest() {
-		aposta = new Aposta("        ", 200, "N VAI ACONTECER");
+		aposta = new Aposta(1, "        ", 200, "N VAI ACONTECER");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void apostaValorNegativoTest() {
-		aposta = new Aposta("Marcelo", -30, "N VAI ACONTECER");
+		aposta = new Aposta(1, "Marcelo", -30, "N VAI ACONTECER");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void apostaValorZeroTest() {
-		aposta = new Aposta("Marcelo", 0, "N VAI ACONTECER");
+		aposta = new Aposta(1, "Marcelo", 0, "N VAI ACONTECER");
 	}
 	
 	@Test

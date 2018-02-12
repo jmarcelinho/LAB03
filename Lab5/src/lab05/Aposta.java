@@ -12,6 +12,7 @@ public class Aposta {
 	private String nomeApostador;
 	private double valorAposta;
 	private Previsao previsao;
+	private int cenario;
 	
 	/**
 	 * Constroi uma aposta utilizando o nome do apostador,
@@ -20,7 +21,7 @@ public class Aposta {
 	 * @param valorAposta valor apostado.
 	 * @param previsao previsao da aposta.
 	 */
-	public Aposta(String nomeApostador, double valorAposta, String previsao) {
+	public Aposta(int cenario, String nomeApostador, double valorAposta, String previsao) {
 		isValid(nomeApostador,valorAposta, previsao);
 		if(previsao.equals("N VAI ACONTECER")) {
 			this.previsao = Previsao.NAO_VAI_ACONTECER;
@@ -31,6 +32,7 @@ public class Aposta {
 		}
 		this.nomeApostador = nomeApostador;
 		this.valorAposta = valorAposta;
+		this.cenario = cenario;
 	}
 	
 	private void isValid(String nomeApostador, double valorAposta, String previsao) {
@@ -43,12 +45,25 @@ public class Aposta {
 		if(previsao.trim().equals(""))
 			throw new IllegalArgumentException("Erro no cadastro de aposta: Previsao nao pode ser vazia ou nula");
 	}
+	
 	/**
 	 * Retorna um double representando o  valor da aposta.
 	 * @return valor da aposta.
 	 */
 	public double getValor() {
 		return this.valorAposta;
+	}
+	
+	public boolean getPrevisaoAposta() {
+		if(this.previsao==Previsao.NAO_VAI_ACONTECER) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
+	public int getCenario() {
+		return this.cenario;
 	}
 	
 	/**

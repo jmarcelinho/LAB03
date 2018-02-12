@@ -1,7 +1,6 @@
 package lab05;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+
 
 /**
  * Representa um cenario para uma aposta.
@@ -20,9 +19,7 @@ import java.util.Iterator;
 public class Cenario {
 	protected String descricao;
 	protected Estado estado;
-	protected double soma_ocorre;
-	protected double soma_nao_ocorre;
-	protected ArrayList <Aposta> apostas;
+	protected double somaPerdedoras;
 	
 	/**
 	 * Cria o cenario a partir de uma descricao.
@@ -35,26 +32,7 @@ public class Cenario {
 		if(descricao.trim().equals("")) throw new IllegalArgumentException("Erro no cadastro de cenario: Descricao nao pode ser vazia");
 		this.descricao = descricao;
 		this.estado = Estado.NAO_FINALIZADO;
-		apostas = new ArrayList<>();
-		this.soma_ocorre = 0;
-		this.soma_nao_ocorre = 0;
-	}
-	
-	/**
-	 * Cadastra apostas no cenario.
-	 * Uma aposta eh cadastrada a partir do nome de um 
-	 * apostador, o valor da aposta e a previsao para aposta.
-	 * @param nomeApostador nome do apostador.
-	 * @param valorAposta valor da aposta.
-	 * @param previsao previsao da aposta.
-	 */
-	public void cadastrarAposta(String nomeApostador, int valorAposta, String previsao) {
-		apostas.add(new Aposta(nomeApostador, valorAposta, previsao));
-		if(previsao.equals("VAI ACONTECER")) {
-			soma_ocorre += valorAposta;
-		}else {
-			soma_nao_ocorre += valorAposta;
-		}
+		this.somaPerdedoras = -1;
 	}
 	
 	/**
@@ -70,41 +48,16 @@ public class Cenario {
 		}
 		
 	}
-	
-	/**
-	 * Retorna a soma de todas as apostas perdedoras.
-	 * @return soma das apostas perdedoras.
-	 */
-	public int getSomaPerdedoras() {
-		if(this.estado.equals(Estado.NAO_FINALIZADO))
-			return -1;
-		if(this.estado.equals(Estado.FINALIZADO_OCORREU)) {
-			return (int)soma_nao_ocorre;
-		}
-		return (int)soma_ocorre;
+	public void setSomaPerdedoras(int soma) {
+		this.somaPerdedoras = soma;
 	}
 	
-	/**
-	 * Retorna as representacoes em string das 
-	 * apostas cadastradas no cenario.
-	 * 
-	 * @return representacoes em string das apostas no cenario.
-	 */
-	public String listarApostas() {
-		Iterator <Aposta> it = apostas.iterator();
-		String res = "";
-		while(it.hasNext()){
-			res+=it.next().toString() + "\n";
-		}
-		return res;
+	public double getSomaPerdedoras() {
+		return this.somaPerdedoras;
 	}
 	
-	public int numeroApostas() {
-		return apostas.size();
-	}
-	
-	public int valorApostas() {
-		return (int) (soma_ocorre + soma_nao_ocorre); 
+	public Estado getEstadoCenario() {
+		return this.estado;
 	}
 	
 	/**

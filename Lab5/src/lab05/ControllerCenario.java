@@ -13,32 +13,16 @@ import java.util.Iterator;
  */
 public class ControllerCenario {
 	private ArrayList<Cenario> cenarios;
-	private int caixa;
-	private double porcentagemRetirada;
 	
 	/**
-	 * O sistema eh iniciado com um valor inicial em caixa
-	 * e a porcentagem que deve ser retirada das apostas para o
-	 * caixa.
-	 * @param valorCaixa valor inicial do caixa.
-	 * @param porcentagem porcentagem de retirada para o caixa.
+	 * Inicia o controller de cenario.
+	 * O controller possui uma lista de cenarios cadastrados
+	 * que inicialmente eh vazia.
 	 */
-	public ControllerCenario(int valorCaixa, double porcentagem) {
-		if(valorCaixa<0) throw new IllegalArgumentException("Erro na inicializacao: Caixa nao pode ser inferior a 0");
-		if(porcentagem<0) throw new IllegalArgumentException("Erro na inicializacao: Taxa nao pode ser inferior a 0");
+	public ControllerCenario() {
 		this.cenarios = new ArrayList<>();
-		this.caixa = valorCaixa;
-		this.porcentagemRetirada = porcentagem;
 	}
-	
-	/**
-	 * Retorna um inteiro representando 
-	 * o valor em caixa do sistema.
-	 * @return o valor em caixa do sistema.
-	 */
-	public int getCaixa() {
-		return this.caixa;
-	}
+
 	
 	/**
 	 * Verifica se a numeracao do cenario eh valida.
@@ -46,12 +30,13 @@ public class ControllerCenario {
 	 * lista dos cenarios cadastrados.
 	 * @param cenario numeracao de um cenario.
 	 */
-	private void isValidConsultaCenario(int cenario) {
-		if(cenario < 0) 
-			throw new IllegalArgumentException("Erro na consulta de cenario: Cenario invalido");
-		else if(cenario >=cenarios.size()){
-			throw new IllegalArgumentException("Erro na consulta de cenario: Cenario nao cadastrado");
+	public int isValidCenario(int cenario) {
+		if(cenario-1 < 0) 
+			return 0;
+		else if(cenario-1 >=cenarios.size()){
+			return 1;
 		}
+		return -1;
 	}
 	
 	/**
@@ -63,20 +48,6 @@ public class ControllerCenario {
 	 */
 	public int cadastrarCenario(String descricao) {
 		cenarios.add(new Cenario(descricao));
-		return cenarios.size();
-	}
-	
-	/**
-	 * Cadastra cenario no sistema a partir
-	 * de uma descricao e o bonus e
-	 * retorna a numeracao
-	 * dada pelo sistema ao cenario.
-	 * @param descricao descricao do sistema.
-	 * @return numeracao do sistema cadastrado.
-	 */
-	public int cadastrarCenario(String descricao, int bonus) {
-		cenarios.add(new CenarioBonus(descricao, bonus));
-		this.caixa -= bonus;
 		return cenarios.size();
 	}
 	
@@ -115,6 +86,7 @@ public class ControllerCenario {
 		return res;
 	}
 	
+	
 	/**
 	 * Fecha um cenario a partir da sua numeracao e 
 	 * a informacao se ele ocorreu ou nao.
@@ -126,8 +98,10 @@ public class ControllerCenario {
 	 * numeracao do cenario a ser fechado.
 	 * 
 	 * @param ocorreu informacao se o cenario ocorreu ou nao.
+	 * @return valor inteiro que deve ser adicionado ao caixa
+	 * do sistema.
 	 */
-	public void fecharCenario(int cenario, boolean ocorreu) {
+	public void fecharCenario(int cenario, boolean ocorreu, int somaPerdedoras) {
 		if(cenario-1 < 0) 
 			throw new IllegalArgumentException("Erro ao fechar aposta: Cenario invalido");
 		else if(cenario-1 >=cenarios.size()){
@@ -135,10 +109,11 @@ public class ControllerCenario {
 		}
 		if(ocorreu) {
 			cenarios.get(cenario-1).fecharCenario(Estado.FINALIZADO_OCORREU);
+			cenarios.get(cenario -1).setSomaPerdedoras(somaPerdedoras);
 		}else {
 			cenarios.get(cenario-1).fecharCenario(Estado.FINALIZADO_NAO_OCORREU);
+			cenarios.get(cenario -1).setSomaPerdedoras(somaPerdedoras);
 		}
-		this.caixa += getCaixaCenario(cenario);
 	}
 	
 	/**
@@ -151,15 +126,13 @@ public class ControllerCenario {
 	public int getCaixaCenario(int cenario) {
 		if(cenario-1 < 0) 
 			throw new IllegalArgumentException("Erro na consulta do caixa do cenario: Cenario invalido");
-		else if(cenario-1 >=cenarios.size()){
+		else if(cenario-1 >= cenarios.size()){
 			throw new IllegalArgumentException("Erro na consulta do caixa do cenario: Cenario nao cadastrado");
 		}
-		int soma_perdedoras = cenarios.get(cenario-1).getSomaPerdedoras();
+		int soma_perdedoras = (int)cenarios.get(cenario-1).getSomaPerdedoras();
 		if(soma_perdedoras == -1)
 			throw new IllegalArgumentException("Erro na consulta do caixa do cenario: Cenario ainda esta aberto");
-		int caixaCenario = (int) (soma_perdedoras * this.porcentagemRetirada);
-		//caixaCenario*=100;
-		return caixaCenario;
+		return soma_perdedoras;
 	}
 	
 	/**
@@ -178,80 +151,13 @@ public class ControllerCenario {
 		else if(cenario-1 >=cenarios.size()){
 			throw new IllegalArgumentException("Erro na consulta do total de rateio do cenario: Cenario nao cadastrado");
 		}
-		int rateio = cenarios.get(cenario-1).getSomaPerdedoras();
+		int rateio = (int)cenarios.get(cenario-1).getSomaPerdedoras();
 		if(rateio==-1) {
 			throw new IllegalArgumentException("Erro na consulta do total de rateio do cenario: Cenario ainda esta aberto");
 		}
-		rateio -= getCaixaCenario(cenario);
 		return rateio;
 	}
-	/**
-	 * Retorna representacao em string de todas 
-	 * as apostas cadastradas em um cenario.
-	 * Para exibir as apostas eh necessario passar
-	 * um inteiro que representa um cenario.
-	 * @param cenario inteiro que representa um cenario.
-	 * @return representacao em string das apostas cadastradas
-	 * em um cenario.
-	 */
-	public String exibeApostas(int cenario) {
-		isValidConsultaCenario(--cenario);
-		return cenarios.get(cenario).listarApostas();
-	}
 	
-	/**
-	 * Cadastra apostas em um determinado cenario.
-	 * Eh necessario que seja informado um inteiro 
-	 * que representa o cenario no qual a aposta deve ser
-	 * cadastrada.
-	 * @param cenario inteiro que representa um cenario.
-	 * @param apostador nome do apostador.
-	 * @param valor valor da aposta.
-	 * @param previsao previsao para aposta(ocorre ou nao ocorre).
-	 */
-	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) {
-		if(cenario-1 < 0) 
-			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario invalido");
-		else if(cenario-1 >=cenarios.size()){
-			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario nao cadastrado");
-		}
-		cenarios.get(cenario-1).cadastrarAposta(apostador, valor, previsao);
-	}
 	
-	/**
-	 * Retorna o numero de apostas de um determinado cenario.
-	 * @param cenario inteiro que representa um cenario.
-	 * @return numero de apostas em um cenario.
-	 */
-	public int totalDeApostas(int cenario) {
-		if(cenario-1 < 0) 
-			throw new IllegalArgumentException("Erro na consulta do total de apostas: Cenario invalido");
-		else if(cenario-1 >=cenarios.size()){
-			throw new IllegalArgumentException("Erro na consulta do total de apostas: Cenario nao cadastrado");
-		}
-		return cenarios.get(cenario-1).numeroApostas();
-	}
-	
-	/**
-	 * Retorna o valor total de apostas de um
-	 * determinado cenario.
-	 * @param cenario inteiro que representa um cenario.
-	 * @return valor total de apostas em um cenario.
-	 */
-	public int valorTotalDeApostas(int cenario) {
-		if(cenario-1 < 0) 
-			throw new IllegalArgumentException("Erro na consulta do valor total de apostas: Cenario invalido");
-		else if(cenario-1 >=cenarios.size()){
-			throw new IllegalArgumentException("Erro na consulta do valor total de apostas: Cenario nao cadastrado");
-		}
-		return cenarios.get(cenario-1).valorApostas();
-	}
 }
-
-
-
-
-
-
-
 
