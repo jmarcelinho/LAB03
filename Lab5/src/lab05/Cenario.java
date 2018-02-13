@@ -56,6 +56,9 @@ public class Cenario {
 		return this.somaPerdedoras;
 	}
 	
+	public double getSomaPerdedorasRateio() {
+		return this.somaPerdedoras;
+	}
 	public Estado getEstadoCenario() {
 		return this.estado;
 	}

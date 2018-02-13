@@ -55,7 +55,7 @@ public class Aposta {
 	}
 	
 	public boolean getPrevisaoAposta() {
-		if(this.previsao==Previsao.NAO_VAI_ACONTECER) {
+		if(this.previsao.getPrevisao().equals("N VAI ACONTECER")) {
 			return false;
 		}else {
 			return true;

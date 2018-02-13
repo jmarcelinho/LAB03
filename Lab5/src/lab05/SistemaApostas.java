@@ -44,6 +44,23 @@ public class SistemaApostas {
 	}
 	
 	/**
+	 * Cadastra um cenario com bonus no sistema.
+	 * O cadastro eh feito a partir 
+	 * de uma descricao e um valor bonus.
+	 * E depois retorna a numeracao
+	 * dada pelo sistema ao cenario.
+	 * 
+	 * @param descricao descricao do sistema.
+	 * @return numeracao do sistema cadastrado.
+	 */
+	public int cadastrarCenario(String descricao, int bonus) {
+		int numero;
+		numero = controleCenario.cadastrarCenario(descricao, bonus);
+		this.caixa -= bonus;
+		return numero;
+	}
+	
+	/**
 	 * Retorna uma string representando um cenario
 	 * pesquisado a partir da sua numeracao.
 	 * 

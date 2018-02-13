@@ -81,7 +81,7 @@ public class ControllerAposta {
 		int soma = 0;
 		if(ocorreu) {
 			for(Aposta aposta: apostas) { 
-				if(aposta.getCenario()==cenario) { //aposta perdedoras sao as que nao ocorreram
+				if(aposta.getCenario() == cenario) { //aposta perdedoras sao as que nao ocorreram
 					if(!aposta.getPrevisaoAposta())
 						soma += aposta.getValor();
 				}

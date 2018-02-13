@@ -52,6 +52,21 @@ public class ControllerCenario {
 	}
 	
 	/**
+	 * Cadastra um cenario com bonus no sistema.
+	 * O cadastro eh feito a partir 
+	 * de uma descricao e um valor bonus.
+	 * E depois retorna a numeracao
+	 * dada pelo sistema ao cenario.
+	 * 
+	 * @param descricao descricao do sistema.
+	 * @return numeracao do sistema cadastrado.
+	 */
+	public int cadastrarCenario(String descricao, int bonus) {
+		cenarios.add(new CenarioBonus(descricao, bonus));
+		return cenarios.size();
+	}
+	
+	/**
 	 * Retorna uma string representando um cenario
 	 * pesquisado a partir da sua numeracao.
 	 * 
@@ -65,7 +80,7 @@ public class ControllerCenario {
 			throw new IllegalArgumentException("Erro na consulta de cenario: Cenario nao cadastrado");
 		}
 		String res = numeracao + " - ";
-		res +=cenarios.get(numeracao-1).toString();
+		res += cenarios.get(numeracao-1).toString();
 		return res;
 	}
 	
@@ -151,7 +166,7 @@ public class ControllerCenario {
 		else if(cenario-1 >=cenarios.size()){
 			throw new IllegalArgumentException("Erro na consulta do total de rateio do cenario: Cenario nao cadastrado");
 		}
-		int rateio = (int)cenarios.get(cenario-1).getSomaPerdedoras();
+		int rateio = (int)cenarios.get(cenario-1).getSomaPerdedorasRateio();
 		if(rateio==-1) {
 			throw new IllegalArgumentException("Erro na consulta do total de rateio do cenario: Cenario ainda esta aberto");
 		}

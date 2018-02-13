@@ -6,14 +6,15 @@ public class Facade {
 	private SistemaApostas sistema;
 	
 	public Facade() {
-		sistema = new SistemaApostas(100000, 0.01);
+		//sistema = new SistemaApostas(100000, 0.01);
 	}
 	
 	public static void main(String[] args) {
 		args = new String[] {"lab05.Facade", "acceptance_test/us1_test.txt", 
 				"acceptance_test/us2_test.txt",
 				"acceptance_test/us3_test.txt",
-				"acceptance_test/us4_test.txt"};
+				"acceptance_test/us4_test.txt",
+				"acceptance_test/us5_test.txt"};
 		EasyAccept.main(args);
 	}
 	public void inicializa(int caixa, double porcentagem) {
@@ -26,6 +27,10 @@ public class Facade {
 	
 	public int cadastrarCenario(String descricao) {
 		return this.sistema.cadastrarCenario(descricao);
+	}
+	
+	public int cadastrarCenario(String descricao, int bonus) {
+		return this.sistema.cadastrarCenario(descricao, bonus);
 	}
 	
 	public String exibirCenario(int numeracao) {
