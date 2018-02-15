@@ -14,7 +14,8 @@ public class Facade {
 				"acceptance_test/us2_test.txt",
 				"acceptance_test/us3_test.txt",
 				"acceptance_test/us4_test.txt",
-				"acceptance_test/us5_test.txt"};
+				"acceptance_test/us5_test.txt",
+				"acceptance_test/us6_test.txt"};
 		EasyAccept.main(args);
 	}
 	public void inicializa(int caixa, double porcentagem) {
@@ -45,6 +46,14 @@ public class Facade {
 		this.sistema.cadastrarAposta(cenario, apostador, valor, previsao);
 	}
 	
+	public int cadastrarApostaSeguraValor(int cenario, String nomeApostador, int valorAposta, String previsao, int valorAssegurado, int custo) {
+		return this.sistema.cadastrarAposta(cenario, nomeApostador, valorAposta, previsao, valorAssegurado, custo);
+	}
+	
+	public int cadastrarApostaSeguraTaxa(int cenario, String nomeApostador, int valorAposta, String previsao, double taxa, int custo) {
+		return this.sistema.cadastrarAposta(cenario, nomeApostador, valorAposta, previsao, taxa, custo);
+	}
+	
 	public int valorTotalDeApostas(int cenario) {
 		return sistema.valorTotalDeApostas(cenario);
 	}
@@ -67,5 +76,13 @@ public class Facade {
 	
 	public int getTotalRateioCenario(int cenario) {
 		return sistema.getTotalRateio(cenario);
+	}
+	
+	public void alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
+		this.sistema.alterarSeguroValor(cenario, apostaAssegurada, valor);
+	}
+	
+	public void alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
+		this.sistema.alterarSeguroTaxa(cenario, apostaAssegurada, taxa);
 	}
 }

@@ -13,6 +13,7 @@ public class Aposta {
 	private double valorAposta;
 	private Previsao previsao;
 	private int cenario;
+	private Tipo tipo;
 	
 	/**
 	 * Constroi uma aposta utilizando o nome do apostador,
@@ -33,6 +34,37 @@ public class Aposta {
 		this.nomeApostador = nomeApostador;
 		this.valorAposta = valorAposta;
 		this.cenario = cenario;
+		this.tipo = null;
+	}
+	
+	public Aposta(int cenario, String nomeApostador, double valorAposta, String previsao, int valor, int id) {
+		isValid(nomeApostador,valorAposta, previsao);
+		if(previsao.equals("N VAI ACONTECER")) {
+			this.previsao = Previsao.NAO_VAI_ACONTECER;
+		}else if(previsao.equals("VAI ACONTECER")){
+			this.previsao = Previsao.VAI_ACONTECER;
+		}else {
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Previsao invalida");
+		}
+		this.nomeApostador = nomeApostador;
+		this.valorAposta = valorAposta;
+		this.cenario = cenario;
+		this.tipo = new SeguroValor(id, valor);
+	}
+	
+	public Aposta(int cenario, String nomeApostador, double valorAposta, String previsao, double taxa, int id) {
+		isValid(nomeApostador,valorAposta, previsao);
+		if(previsao.equals("N VAI ACONTECER")) {
+			this.previsao = Previsao.NAO_VAI_ACONTECER;
+		}else if(previsao.equals("VAI ACONTECER")){
+			this.previsao = Previsao.VAI_ACONTECER;
+		}else {
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Previsao invalida");
+		}
+		this.nomeApostador = nomeApostador;
+		this.valorAposta = valorAposta;
+		this.cenario = cenario;
+		this.tipo = new SeguroTaxa(id, taxa, valorAposta);
 	}
 	
 	private void isValid(String nomeApostador, double valorAposta, String previsao) {
@@ -51,19 +83,40 @@ public class Aposta {
 	 * @return valor da aposta.
 	 */
 	public double getValor() {
-		return this.valorAposta;
+		if(this.tipo==null) {
+			return this.valorAposta;
+		}
+		return (this.valorAposta - this.tipo.valor);
 	}
 	
 	public boolean getPrevisaoAposta() {
-		if(this.previsao.getPrevisao().equals("N VAI ACONTECER")) {
+		if(this.previsao.getPrevisao().equals("N VAI ACONTECER"))
 			return false;
-		}else {
-			return true;
-		}
+		return true;
 	}
 	
 	public int getCenario() {
 		return this.cenario;
+	}
+	
+	public int getIdTipo() {
+		if(tipo==null)
+			return -1;
+		return tipo.getId();
+	}
+	
+	public int alteraTipoValor(int valor) {
+		if(tipo==null)
+			throw new IllegalArgumentException("tipo eh nulo");
+		tipo = new SeguroValor(tipo.getId(), valor);
+		return tipo.getId();
+	}
+	
+	public int alteraTipoTaxa(double taxa) {
+		if(tipo==null)
+			throw new IllegalArgumentException("tipo eh nulo");
+		tipo = new SeguroTaxa(tipo.getId(), taxa, this.valorAposta);
+		return tipo.getId();
 	}
 	
 	/**
@@ -75,6 +128,6 @@ public class Aposta {
 	 * @return representacao em string da aposta.
 	 */
 	public String toString() {
-		return this.nomeApostador + " - R$" + this.valorAposta + " - " + this.previsao.getPrevisao();
+		return this.nomeApostador + " - R$" + this.valorAposta + " - " + this.previsao.getPrevisao() + tipo.toString();
 	}
 }

@@ -100,6 +100,26 @@ public class SistemaApostas {
 		controleAposta.cadastrarAposta(cenario, nomeApostador, valorAposta, previsao);
 	}
 	
+	public int cadastrarAposta(int cenario, String nomeApostador, double valorAposta, String previsao, int valor, int custo) {
+		if(controleCenario.isValidCenario(cenario)==0) 
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario invalido");
+		else if(controleCenario.isValidCenario(cenario)==1)
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario nao cadastrado");
+		int ret = controleAposta.cadastrarAposta(cenario, nomeApostador, valorAposta, previsao, valor);
+		this.caixa += custo;
+		return ret;
+	}
+	
+	public int cadastrarAposta(int cenario, String nomeApostador, double valorAposta, String previsao, double taxa, int custo) {
+		if(controleCenario.isValidCenario(cenario)==0) 
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario invalido");
+		else if(controleCenario.isValidCenario(cenario)==1)
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario nao cadastrado");
+		int ret = controleAposta.cadastrarAposta(cenario, nomeApostador, valorAposta, previsao, taxa);
+		this.caixa += custo;
+		return ret;
+	}
+	
 	/**
 	 * Retorna o valor total de apostas cadastradas
 	 * em um cenario.
@@ -153,6 +173,7 @@ public class SistemaApostas {
 	 */
 	public void fecharAposta(int cenario, boolean ocorreu) {
 		int somaPerdedoras = controleAposta.getSomaPerdedoras(cenario, ocorreu);
+		System.out.println("Veio até aqui" + cenario);
 		controleCenario.fecharCenario(cenario, ocorreu, somaPerdedoras);
 		this.caixa += getCaixaCenario(cenario);
 	}
@@ -184,6 +205,13 @@ public class SistemaApostas {
 		int rateio = this.controleCenario.getTotalRateio(cenario);
 		return rateio - getCaixaCenario(cenario);
 	}
-		
+	
+	public void alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
+		this.controleAposta.alterarSeguroValor(cenario, apostaAssegurada, valor);
+	}
+	
+	public void alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
+		this.controleAposta.alterarSeguroTaxa(cenario, apostaAssegurada, taxa);
+	}
 	
 }

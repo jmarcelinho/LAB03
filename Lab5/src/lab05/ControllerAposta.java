@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class ControllerAposta {
 	private ArrayList <Aposta> apostas;
+	private int idSeguro;
 	
 	public ControllerAposta() {
 		this.apostas = new ArrayList<>();
-		
+		this.idSeguro = 0;
 	}
 	
 	/**
@@ -22,6 +23,16 @@ public class ControllerAposta {
 	 */
 	public void cadastrarAposta(int cenario, String nomeApostador, double valorAposta, String previsao) {
 		apostas.add(new Aposta(cenario, nomeApostador, valorAposta, previsao));
+	}
+	
+	public int cadastrarAposta(int cenario, String nomeApostador, double valorAposta, String previsao, int valor) {
+		apostas.add(new Aposta(cenario, nomeApostador, valorAposta, previsao, valor, ++idSeguro));
+		return this.idSeguro;
+	}
+	
+	public int cadastrarAposta(int cenario, String nomeApostador, double valorAposta, String previsao, double taxa) {
+		apostas.add(new Aposta(cenario, nomeApostador, valorAposta, previsao, taxa, ++idSeguro));
+		return this.idSeguro;
 	}
 	
 	/**
@@ -75,6 +86,9 @@ public class ControllerAposta {
 	
 	/**
 	 * Retorna a soma de todas as apostas perdedoras.
+	 * 
+	 * @param cenario cenario no qual estão cadastradas as apostas.
+	 * @param ocorreu booleano que informa se o cenario ocorreu ou nao.
 	 * @return soma das apostas perdedoras.
 	 */
 	public int getSomaPerdedoras(int cenario, boolean ocorreu) {
@@ -89,11 +103,36 @@ public class ControllerAposta {
 		}else{
 			for(Aposta aposta: apostas) { 
 				if(aposta.getCenario()==cenario) { //aposta perdedoras sao as que nao ocorreram
-					if(aposta.getPrevisaoAposta())
+					if(aposta.getPrevisaoAposta()) {
 						soma += aposta.getValor();
+					}
 				}
 			}
 		}
 		return soma;
 	}
+	
+	public int alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
+		for(Aposta aposta: apostas) {
+			if(aposta.getCenario() == cenario) {
+				if(aposta.getIdTipo() == apostaAssegurada) {
+					return aposta.alteraTipoValor(valor);
+					//return aposta.getIdTipo();
+				}
+			}
+		}
+		return 0;
+	}
+	
+	public int alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
+		for(Aposta aposta: apostas) {
+			if(aposta.getCenario() == cenario) {
+				if(aposta.getIdTipo() == apostaAssegurada) {
+					return aposta.alteraTipoTaxa(taxa);
+				}
+			}
+		}
+		return 0;
+	}
+	
 }
