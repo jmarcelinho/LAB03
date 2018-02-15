@@ -195,7 +195,7 @@ public class SistemaApostas {
 		int somaPerdedoras = controleAposta.getSomaPerdedoras(cenario, ocorreu);
 		controleCenario.fecharCenario(cenario, ocorreu, somaPerdedoras);
 		this.caixa += getCaixaCenario(cenario);
-		this.caixa -= controleAposta.getSomaApostasSeguradas(cenario, ocorreu);
+		this.caixa -= controleAposta.getApostaSeguradas(cenario, ocorreu);
 	}
 	
 	/**

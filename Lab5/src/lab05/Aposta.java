@@ -119,6 +119,12 @@ public class Aposta {
 		if(previsao.trim().equals(""))
 			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Previsao nao pode ser vazia ou nula");
 	}
+	public boolean hasTipo() {
+		if(tipo==null) {
+			return false;
+		}
+		return true;
+	}
 	/**
 	 * Retorna um double representando o  valor da aposta.
 	 * @return valor da aposta.
@@ -134,6 +140,7 @@ public class Aposta {
 		if(tipo==null) return 0;
 		return tipo.getValor();
 	}
+	
 	/**
 	 * Retorna um booleano que informa se a previsao
 	 * da aposta vai acontecer ou nao vai acontecer.
@@ -147,8 +154,8 @@ public class Aposta {
 	}
 	
 	/**
-	 * Retorna id do cenario em que a aposta está cadastrada.
-	 * @return id do cenario em que a aposta está cadastrada.
+	 * Retorna id do cenario em que a aposta estï¿½ cadastrada.
+	 * @return id do cenario em que a aposta estï¿½ cadastrada.
 	 */
 	public int getCenario() {
 		return this.cenario;

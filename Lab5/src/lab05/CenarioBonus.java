@@ -1,7 +1,7 @@
 package lab05;
 
 public class CenarioBonus extends Cenario{
-	private int bonus;
+	private double bonus;
 	
 	public CenarioBonus(String descricao, int bonus) {
 		super(descricao);
@@ -21,6 +21,6 @@ public class CenarioBonus extends Cenario{
 	
 	@Override
 	public String toString() {
-		return super.toString() + " - R$ " + this.bonus;
+		return super.toString() + " - R$ " + String.format("%.2f", this.bonus/100);
 	}
 }

@@ -5,7 +5,7 @@
 cadastrarCenario descricao="As provas vao ser corrigidas ate sexta" bonus=1000
 cadastrarCenario descricao="As provas nao vao ser corrigidas ate sexta" bonus=10
 
-expect "4 - As provas vao ser corrigidas ate sexta - Nao finalizado - R$ 1000" exibirCenario cenario=4
+expect "4 - As provas vao ser corrigidas ate sexta - Nao finalizado - R$ 10,00" exibirCenario cenario=4
 
 cadastrarAposta cenario=4 apostador="Matheus Melanio" valor=2000 previsao="N VAI ACONTECER"
 cadastrarAposta cenario=4 apostador="Viktor Borgino" valor=3000 previsao="VAI ACONTECER"

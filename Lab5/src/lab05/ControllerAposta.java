@@ -107,7 +107,7 @@ public class ControllerAposta {
 	/**
 	 * Retorna a soma de todas as apostas perdedoras.
 	 * 
-	 * @param cenario cenario no qual estão cadastradas as apostas.
+	 * @param cenario cenario no qual estï¿½o cadastradas as apostas.
 	 * @param ocorreu booleano que informa se o cenario ocorreu ou nao.
 	 * @return soma das apostas perdedoras.
 	 */
@@ -131,7 +131,6 @@ public class ControllerAposta {
 		}
 		return soma;
 	}
-	
 	
 	/**
 	 * Altera uma aposta assegurada por taxa para uma 
@@ -172,6 +171,17 @@ public class ControllerAposta {
 			}
 		}
 		return 0;
+	}
+	
+	public int getApostaSeguradas(int cenario, boolean ocorreu) {
+		double soma = 0;
+		for(Aposta aposta: apostas) { 	
+				if(aposta.getCenario() == cenario) { //aposta perdedoras sao as que nao ocorreram
+					if(aposta.getPrevisaoAposta() != ocorreu)
+							soma += aposta.getValorTipo();
+				}
+		}
+		return (int)soma;
 	}
 	
 }
