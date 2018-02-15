@@ -1,7 +1,7 @@
 package lab05;
 
 public class SeguroValor extends Tipo{
-	public int valor;	
+	public double valor;	
 	private int id;
 	public SeguroValor(int id, int valor) {
 		this.id = id;

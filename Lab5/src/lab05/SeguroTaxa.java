@@ -7,7 +7,7 @@ public class SeguroTaxa extends Tipo{
 	public SeguroTaxa(int id, double taxa, double valorAposta) {
 		this.id = id;
 		this.taxa = taxa;
-		this.valor = valorAposta;
+		this.valor = (taxa * valorAposta);
 	}
 	
 	public String toString() {
@@ -15,7 +15,7 @@ public class SeguroTaxa extends Tipo{
 	}
 	
 	public double getValor() {
-		return (this.taxa * this.valor);
+		return this.valor;
 	}
 	public int getId() {
 		return this.id;

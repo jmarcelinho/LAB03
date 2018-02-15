@@ -38,13 +38,13 @@ public class Aposta {
 	}
 	
 	public Aposta(int cenario, String nomeApostador, double valorAposta, String previsao, int valor, int id) {
-		isValid(nomeApostador,valorAposta, previsao);
+		isValidValor(nomeApostador,valorAposta, previsao);
 		if(previsao.equals("N VAI ACONTECER")) {
 			this.previsao = Previsao.NAO_VAI_ACONTECER;
 		}else if(previsao.equals("VAI ACONTECER")){
 			this.previsao = Previsao.VAI_ACONTECER;
 		}else {
-			throw new IllegalArgumentException("Erro no cadastro de aposta: Previsao invalida");
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Previsao invalida");
 		}
 		this.nomeApostador = nomeApostador;
 		this.valorAposta = valorAposta;
@@ -53,13 +53,13 @@ public class Aposta {
 	}
 	
 	public Aposta(int cenario, String nomeApostador, double valorAposta, String previsao, double taxa, int id) {
-		isValid(nomeApostador,valorAposta, previsao);
+		isValidTaxa(nomeApostador,valorAposta, previsao);
 		if(previsao.equals("N VAI ACONTECER")) {
 			this.previsao = Previsao.NAO_VAI_ACONTECER;
 		}else if(previsao.equals("VAI ACONTECER")){
 			this.previsao = Previsao.VAI_ACONTECER;
 		}else {
-			throw new IllegalArgumentException("Erro no cadastro de aposta: Previsao invalida");
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Previsao invalida");
 		}
 		this.nomeApostador = nomeApostador;
 		this.valorAposta = valorAposta;
@@ -78,6 +78,27 @@ public class Aposta {
 			throw new IllegalArgumentException("Erro no cadastro de aposta: Previsao nao pode ser vazia ou nula");
 	}
 	
+	private void isValidValor(String nomeApostador, double valorAposta, String previsao) {
+		if(nomeApostador==null) 
+			throw new NullPointerException("Erro no cadastro de aposta assegurada por valor: Apostador nao pode ser vazio ou nulo");
+		if(nomeApostador.trim().equals("")) 
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Apostador nao pode ser vazio ou nulo");
+		if(valorAposta<=0) 
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Valor nao pode ser menor ou igual a zero");
+		if(previsao.trim().equals(""))
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Previsao nao pode ser vazia ou nula");
+	}
+	
+	private void isValidTaxa(String nomeApostador, double valorAposta, String previsao) {
+		if(nomeApostador==null) 
+			throw new NullPointerException("Erro no cadastro de aposta assegurada por taxa: Apostador nao pode ser vazio ou nulo");
+		if(nomeApostador.trim().equals("")) 
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Apostador nao pode ser vazio ou nulo");
+		if(valorAposta<=0) 
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Valor nao pode ser menor ou igual a zero");
+		if(previsao.trim().equals(""))
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Previsao nao pode ser vazia ou nula");
+	}
 	/**
 	 * Retorna um double representando o  valor da aposta.
 	 * @return valor da aposta.
@@ -86,7 +107,7 @@ public class Aposta {
 		if(this.tipo==null) {
 			return this.valorAposta;
 		}
-		return (this.valorAposta - this.tipo.valor);
+		return this.valorAposta;
 	}
 	
 	public boolean getPrevisaoAposta() {

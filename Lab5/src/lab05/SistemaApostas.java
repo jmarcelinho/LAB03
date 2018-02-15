@@ -102,9 +102,9 @@ public class SistemaApostas {
 	
 	public int cadastrarAposta(int cenario, String nomeApostador, double valorAposta, String previsao, int valor, int custo) {
 		if(controleCenario.isValidCenario(cenario)==0) 
-			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario invalido");
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Cenario invalido");
 		else if(controleCenario.isValidCenario(cenario)==1)
-			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario nao cadastrado");
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Cenario nao cadastrado");
 		int ret = controleAposta.cadastrarAposta(cenario, nomeApostador, valorAposta, previsao, valor);
 		this.caixa += custo;
 		return ret;
@@ -112,9 +112,9 @@ public class SistemaApostas {
 	
 	public int cadastrarAposta(int cenario, String nomeApostador, double valorAposta, String previsao, double taxa, int custo) {
 		if(controleCenario.isValidCenario(cenario)==0) 
-			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario invalido");
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Cenario invalido");
 		else if(controleCenario.isValidCenario(cenario)==1)
-			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario nao cadastrado");
+			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Cenario nao cadastrado");
 		int ret = controleAposta.cadastrarAposta(cenario, nomeApostador, valorAposta, previsao, taxa);
 		this.caixa += custo;
 		return ret;
@@ -173,7 +173,6 @@ public class SistemaApostas {
 	 */
 	public void fecharAposta(int cenario, boolean ocorreu) {
 		int somaPerdedoras = controleAposta.getSomaPerdedoras(cenario, ocorreu);
-		System.out.println("Veio até aqui" + cenario);
 		controleCenario.fecharCenario(cenario, ocorreu, somaPerdedoras);
 		this.caixa += getCaixaCenario(cenario);
 	}
