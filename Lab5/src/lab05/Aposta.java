@@ -37,6 +37,16 @@ public class Aposta {
 		this.tipo = null;
 	}
 	
+	/**
+	 * Constroi uma aposta assegurada por valor utilizando o nome do apostador,
+	 * o valor que foi apostado e a previsao (vai ou nao ocorrer), valor do seguro
+	 * e id dado pelo sistema a aposta.
+	 * @param nomeApostador nome do apostador.
+	 * @param valorAposta valor apostado.
+	 * @param previsao previsao da aposta.
+	 * @param valor valor da aposta assegurada.
+	 * @param id id dado pelo sistema a aposta assegurada.
+	 */
 	public Aposta(int cenario, String nomeApostador, double valorAposta, String previsao, int valor, int id) {
 		isValidValor(nomeApostador,valorAposta, previsao);
 		if(previsao.equals("N VAI ACONTECER")) {
@@ -52,6 +62,16 @@ public class Aposta {
 		this.tipo = new SeguroValor(id, valor);
 	}
 	
+	/**
+	 * Constroi uma aposta assegurada por taxa utilizando o nome do apostador,
+	 * o valor que foi apostado e a previsao (vai ou nao ocorrer), taxa do seguro
+	 * e id dado pelo sistema a aposta.
+	 * @param nomeApostador nome do apostador.
+	 * @param valorAposta valor apostado.
+	 * @param previsao previsao da aposta.
+	 * @param taxa taxa da aposta assegurada.
+	 * @param id id dado pelo sistema a aposta assegurada.
+	 */
 	public Aposta(int cenario, String nomeApostador, double valorAposta, String previsao, double taxa, int id) {
 		isValidTaxa(nomeApostador,valorAposta, previsao);
 		if(previsao.equals("N VAI ACONTECER")) {
@@ -110,22 +130,46 @@ public class Aposta {
 		return this.valorAposta;
 	}
 	
+	public double getValorTipo() {
+		if(tipo==null) return 0;
+		return tipo.getValor();
+	}
+	/**
+	 * Retorna um booleano que informa se a previsao
+	 * da aposta vai acontecer ou nao vai acontecer.
+	 * 
+	 * @return true se for acontecer e nao caso contrario.
+	 */
 	public boolean getPrevisaoAposta() {
 		if(this.previsao.getPrevisao().equals("N VAI ACONTECER"))
 			return false;
 		return true;
 	}
 	
+	/**
+	 * Retorna id do cenario em que a aposta está cadastrada.
+	 * @return id do cenario em que a aposta está cadastrada.
+	 */
 	public int getCenario() {
 		return this.cenario;
 	}
 	
+	/**
+	 * Retorna o id da aposta assegurada.
+	 * @return id da aposta assegurada.
+	 */
 	public int getIdTipo() {
 		if(tipo==null)
 			return -1;
 		return tipo.getId();
 	}
 	
+	/**
+	 * Altera uma aposta assegurada por taxa
+	 * para uma aposta assegurada por valor
+	 * @param valor valor a ser colocado na aposta.
+	 * @return id da aposta assegurada.
+	 */
 	public int alteraTipoValor(int valor) {
 		if(tipo==null)
 			throw new IllegalArgumentException("tipo eh nulo");
@@ -133,6 +177,12 @@ public class Aposta {
 		return tipo.getId();
 	}
 	
+	/**
+	 * Altera uma aposta assegurada por valor
+	 * para uma aposta assegurada por taxa
+	 * @param taxa taxa a ser colocado na aposta.
+	 * @return id da aposta assegurada.
+	 */
 	public int alteraTipoTaxa(double taxa) {
 		if(tipo==null)
 			throw new IllegalArgumentException("tipo eh nulo");

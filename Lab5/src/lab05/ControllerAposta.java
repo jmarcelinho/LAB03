@@ -25,11 +25,31 @@ public class ControllerAposta {
 		apostas.add(new Aposta(cenario, nomeApostador, valorAposta, previsao));
 	}
 	
+	/**
+	 * Cadastra uma aposta assegurada por valor.
+	 * @param cenario id do cenario no qual a aposta sera cadastrada
+	 * @param nomeApostador nome do apostador
+	 * @param valorAposta valor da aposta a ser cadastrada.
+	 * @param previsao previsao da aposta a ser cadastrada.
+	 * @param valor valor da aposta assegurada.
+	 * @param custo custo do seguro da aposta.
+	 * @return id do cadastro da aposta.
+	 */
 	public int cadastrarAposta(int cenario, String nomeApostador, double valorAposta, String previsao, int valor) {
 		apostas.add(new Aposta(cenario, nomeApostador, valorAposta, previsao, valor, ++idSeguro));
 		return this.idSeguro;
 	}
 	
+	/**
+	 * Cadastra uma aposta assegurada por taxa.
+	 * @param cenario id do cenario no qual a aposta sera cadastrada
+	 * @param nomeApostador nome do apostador
+	 * @param valorAposta valor da aposta a ser cadastrada.
+	 * @param previsao previsao da aposta a ser cadastrada.
+	 * @param taxa taxa da aposta assegurada.
+	 * @param custo custo do seguro da aposta.
+	 * @return id do cadastro da aposta.
+	 */
 	public int cadastrarAposta(int cenario, String nomeApostador, double valorAposta, String previsao, double taxa) {
 		apostas.add(new Aposta(cenario, nomeApostador, valorAposta, previsao, taxa, ++idSeguro));
 		return this.idSeguro;
@@ -112,6 +132,16 @@ public class ControllerAposta {
 		return soma;
 	}
 	
+	
+	/**
+	 * Altera uma aposta assegurada por taxa para uma 
+	 * aposta assegurada por valor.
+	 * 
+	 * @param cenario id do cenario em que a aposta foi cadastrada.
+	 * @param apostaAssegurada id da aposta assegurada.
+	 * @param valor valor do seguro.
+	 * @return id da aposta assegurada.
+	 */
 	public int alterarSeguroValor(int cenario, int apostaAssegurada, int valor) {
 		for(Aposta aposta: apostas) {
 			if(aposta.getCenario() == cenario) {
@@ -124,6 +154,15 @@ public class ControllerAposta {
 		return 0;
 	}
 	
+	/**
+	 * Altera uma aposta assegurada por valor para uma 
+	 * aposta assegurada por taxa.
+	 * 
+	 * @param cenario id do cenario em que a aposta foi cadastrada.
+	 * @param apostaAssegurada id da aposta assegurada.
+	 * @param valor valor do seguro.
+	 * @return id da aposta assegurada.
+	 */
 	public int alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
 		for(Aposta aposta: apostas) {
 			if(aposta.getCenario() == cenario) {
