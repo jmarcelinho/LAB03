@@ -119,12 +119,8 @@ public class Aposta {
 		if(previsao.trim().equals(""))
 			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Previsao nao pode ser vazia ou nula");
 	}
-	public boolean hasTipo() {
-		if(tipo==null) {
-			return false;
-		}
-		return true;
-	}
+	
+
 	/**
 	 * Retorna um double representando o  valor da aposta.
 	 * @return valor da aposta.

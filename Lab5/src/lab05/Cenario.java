@@ -17,6 +17,7 @@ package lab05;
  *
  */
 public class Cenario {
+	protected int numeracao;
 	protected String descricao;
 	protected Estado estado;
 	protected double somaPerdedoras;
@@ -27,9 +28,10 @@ public class Cenario {
 	 * 
 	 * @param descricao descricao de um cenario.
 	 */
-	public Cenario(String descricao) {
+	public Cenario(int id, String descricao) {
 		if(descricao==null) throw new NullPointerException("Erro no cadastro de cenario: Descricao nao pode ser vazia");
 		if(descricao.trim().equals("")) throw new IllegalArgumentException("Erro no cadastro de cenario: Descricao nao pode ser vazia");
+		this.numeracao = id;
 		this.descricao = descricao;
 		this.estado = Estado.NAO_FINALIZADO;
 		this.somaPerdedoras = -1;
@@ -48,19 +50,51 @@ public class Cenario {
 		}
 		
 	}
+	
+	/**
+	 * Altera o valor das somas consideradas 
+	 * perdedoras no cenário.
+	 * @param soma soma das apostas perdedoras do cenario.
+	 */
 	public void setSomaPerdedoras(int soma) {
 		this.somaPerdedoras = soma;
 	}
 	
+	/**
+	 * Retorna a soma dos valores das 
+	 * apostas perdedoras do cenário.
+	 * @return soma das apostas perdedoras do
+	 * cenario.
+	 */
 	public double getSomaPerdedoras() {
 		return this.somaPerdedoras;
 	}
 	
+	/**
+	 * Retorna o valor das apostas perdedoras para
+	 * o calculo do rateio do cenário.
+	 * @return soma das apostas perdedoras do cenario.
+	 */
 	public double getSomaPerdedorasRateio() {
 		return this.somaPerdedoras;
 	}
+	
+	/**
+	 * Retorna o valor do estado do cenario.
+	 * Se foi finalizado (ocorreu), nao finalizado
+	 * e finalizado (nao ocorreu).
+	 * @return estado do cenario.
+	 */
 	public Estado getEstadoCenario() {
 		return this.estado;
+	}
+	
+	/**
+	 * Retorna a numeracao do cenario.
+	 * @return numeracao do cenario.
+	 */
+	public int getNumeracao() {
+		return this.numeracao;
 	}
 	
 	/**
@@ -80,6 +114,30 @@ public class Cenario {
 	 * @return representacao em string do cenario.
 	 */
 	public String toString() {
-		return descricao + " - " + estado.getEstado();
+		return this.numeracao + " - " + this.descricao + " - " + estado.getEstado();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + numeracao;
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Cenario))
+			return false;
+		Cenario other = (Cenario) obj;
+		if (numeracao != other.numeracao)
+			return false;
+		return true;
+	}
+	
+	
 }

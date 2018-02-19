@@ -13,7 +13,7 @@ public class SeguroValor extends Tipo{
 	}
 	
 	public double getValor() {
-		return this.getValor();
+		return this.valor;
 	}
 	
 	public int getId() {

@@ -3,8 +3,8 @@ package lab05;
 public class CenarioBonus extends Cenario{
 	private double bonus;
 	
-	public CenarioBonus(String descricao, int bonus) {
-		super(descricao);
+	public CenarioBonus(int id, String descricao, int bonus) {
+		super(id, descricao);
 		if(bonus<=0)
 			throw new IllegalArgumentException("Erro no cadastro de cenario: Bonus invalido");
 		this.bonus = bonus;
