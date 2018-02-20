@@ -54,4 +54,22 @@ public class ControllerApostaTest {
 		int expected = 400;
 		assertEquals(expected, controleAposta.valorApostas(1));
 	}
+	
+	@Test
+	public void getSomaPerdedorasNaoOcorreTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleAposta.cadastrarAposta(1, "Francisco Cisco", 150, "VAI ACONTECER");
+		controleAposta.cadastrarAposta(1, "Brito", 200, "N VAI ACONTECER");
+		int expected = 150;
+		assertEquals(expected, controleAposta.getSomaPerdedoras(1, false));
+	}
+	
+	@Test
+	public void getSomaPerdedorasOcorreTest() {
+		controleCenario.cadastrarCenario("Todos os alunos vao ser aprovados");
+		controleAposta.cadastrarAposta(1, "Francisco Cisco", 150, "VAI ACONTECER");
+		controleAposta.cadastrarAposta(1, "Brito", 200, "N VAI ACONTECER");
+		int expected = 200;
+		assertEquals(expected, controleAposta.getSomaPerdedoras(1, true));
+	}
 }

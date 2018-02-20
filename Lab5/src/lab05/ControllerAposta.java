@@ -107,7 +107,7 @@ public class ControllerAposta {
 	/**
 	 * Retorna a soma de todas as apostas perdedoras.
 	 * 
-	 * @param cenario cenario no qual est�o cadastradas as apostas.
+	 * @param cenario cenario no qual estao cadastradas as apostas.
 	 * @param ocorreu booleano que informa se o cenario ocorreu ou nao.
 	 * @return soma das apostas perdedoras.
 	 */
