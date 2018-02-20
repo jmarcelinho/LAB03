@@ -202,6 +202,9 @@ public class Aposta {
 	 * @return representacao em string da aposta.
 	 */
 	public String toString() {
-		return this.nomeApostador + " - R$" + this.valorAposta + " - " + this.previsao.getPrevisao() + tipo.toString();
+		if(tipo!=null)
+			return this.nomeApostador + " - R$" + this.valorAposta + " - " + this.previsao.getPrevisao() + tipo.toString();
+		return this.nomeApostador + " - R$" + this.valorAposta + " - " + this.previsao.getPrevisao();
 	}
+	
 }

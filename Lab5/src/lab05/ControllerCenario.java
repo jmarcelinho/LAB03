@@ -87,7 +87,6 @@ public class ControllerCenario {
 	private Cenario buscaCenario(int numeracao) {
 		Cenario cen = null;
 		for(Cenario cenario: cenarios) {
-			System.out.println(cenario.getNumeracao());
 			if(cenario.getNumeracao() == numeracao) {
 				cen =  cenario;
 			}
