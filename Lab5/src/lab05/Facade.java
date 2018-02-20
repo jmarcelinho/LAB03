@@ -91,7 +91,7 @@ public class Facade {
 		this.sistema.alterarOrdem(ordem);
 	}
 	
-	public void exibirCenarioOrdenado(int numeracao) {
-		this.sistema.exibirCenarioOrdenado(numeracao);
+	public String exibirCenarioOrdenado(int numeracao) {
+		return this.sistema.exibirCenarioOrdenado(numeracao);
 	}
 }

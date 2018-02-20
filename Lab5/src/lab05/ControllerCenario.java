@@ -73,7 +73,6 @@ public class ControllerCenario {
 	private Cenario buscaCenario(int numeracao) {
 		Cenario cen = null;
 		for(Cenario cenario: cenarios) {
-			System.out.println(cenario.getNumeracao());
 			if(cenario.getNumeracao() == numeracao) {
 				cen =  cenario;
 			}
@@ -97,24 +96,14 @@ public class ControllerCenario {
 		return buscaCenario(numeracao).toString();
 	}
 	
-<<<<<<< HEAD
-	private Cenario buscaCenario(int numeracao) {
-		Cenario cen = null;
-		for(Cenario cenario: cenarios) {
-			if(cenario.getNumeracao() == numeracao) {
-				cen =  cenario;
-			}
-		}
-		return cen;
-=======
 	public String exibirCenarioOrdenado(int numeracao) {
 		if(numeracao - 1 < 0)
 			throw new IllegalArgumentException("Erro na consulta de cenario ordenado: Cenario invalido");
 		else if(numeracao -1 >= cenarios.size())
 			throw new IllegalArgumentException("Erro na consulta de cenario ordenado: Cenario nao cadastrado");
-		return cenarios.get(numeracao - 1).toString();
-			
->>>>>>> 64d75b35ed2a27bae50a31219969c46a34b76fa2
+		//System.out.println("Contador " + this.cont + " " + cenarios.get(this.cont-1).toString());
+		return cenarios.get(numeracao-1).toString();
+
 	}
 	/**
 	 * Retorna uma string representando uma lista

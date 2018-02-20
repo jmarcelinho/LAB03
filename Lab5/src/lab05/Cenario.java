@@ -164,8 +164,6 @@ public class Cenario implements Comparable<Cenario>{
 	 * 2 se this for menor
 	 */
 	public int compareTo(Cenario c) {
-		return this.getNumeracao() - c.getNumeracao();
-	}
-	
-	
+		return this.numeracao - c.getNumeracao();
+	}	
 }

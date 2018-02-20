@@ -10,13 +10,26 @@ public class SeguroTaxa extends Tipo{
 		this.valor = (taxa * valorAposta);
 	}
 	
+	/**
+	 * Retorna uma representacao em string do tipo de seguro.
+	 * @return representacao em string do tipo do seguro.
+	 */
 	public String toString() {
 		return " - ASSEGURADA(TAXA) - " + (this.taxa*100) + "%";
 	}
 	
+	/**
+	 * Retorna o valor do seguro.
+	 * @return valor do seguro
+	 */
 	public double getValor() {
 		return this.valor;
 	}
+	
+	/**
+	 * Retorna id do seguro
+	 * @return id do seguro
+	 */
 	public int getId() {
 		return this.id;
 	}

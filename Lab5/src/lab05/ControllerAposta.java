@@ -173,6 +173,12 @@ public class ControllerAposta {
 		return 0;
 	}
 	
+	/**
+	 * Retorna o valor de todas as apostas asseguradas.
+	 * @param cenario id do cenario no qual a aposta esta cadastrada
+	 * @param ocorreu informacao se o cenario ocorreu ou nao.
+	 * @return valor em inteiro de todas as apostas seguradas.
+	 */
 	public int getApostaSeguradas(int cenario, boolean ocorreu) {
 		double soma = 0;
 		for(Aposta aposta: apostas) { 	
