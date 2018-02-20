@@ -16,11 +16,12 @@ package lab05;
  * @author Joao Marcelo
  *
  */
-public class Cenario {
+public class Cenario implements Comparable<Cenario>{
 	protected int numeracao;
 	protected String descricao;
 	protected Estado estado;
 	protected double somaPerdedoras;
+	protected  int numAposta;
 	
 	/**
 	 * Cria o cenario a partir de uma descricao.
@@ -35,6 +36,7 @@ public class Cenario {
 		this.descricao = descricao;
 		this.estado = Estado.NAO_FINALIZADO;
 		this.somaPerdedoras = -1;
+		this.numAposta = 0;
 	}
 	
 	/**
@@ -53,7 +55,7 @@ public class Cenario {
 	
 	/**
 	 * Altera o valor das somas consideradas 
-	 * perdedoras no cenário.
+	 * perdedoras no cenï¿½rio.
 	 * @param soma soma das apostas perdedoras do cenario.
 	 */
 	public void setSomaPerdedoras(int soma) {
@@ -62,7 +64,7 @@ public class Cenario {
 	
 	/**
 	 * Retorna a soma dos valores das 
-	 * apostas perdedoras do cenário.
+	 * apostas perdedoras do cenï¿½rio.
 	 * @return soma das apostas perdedoras do
 	 * cenario.
 	 */
@@ -72,7 +74,7 @@ public class Cenario {
 	
 	/**
 	 * Retorna o valor das apostas perdedoras para
-	 * o calculo do rateio do cenário.
+	 * o calculo do rateio do cenï¿½rio.
 	 * @return soma das apostas perdedoras do cenario.
 	 */
 	public double getSomaPerdedorasRateio() {
@@ -116,7 +118,23 @@ public class Cenario {
 	public String toString() {
 		return this.numeracao + " - " + this.descricao + " - " + estado.getEstado();
 	}
-
+	
+	/**
+	 * Retorna o numero de apostas cadastradas
+	 * no cenario.
+	 * @return numero de apostas
+	 */
+	public int getNumeroAposta() {
+		return this.numAposta;
+	}
+	
+	/**
+	 * Incrementa o numero de apostas.
+	 */
+	public void upNumeroAposta() {
+		this.numAposta++ ;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -137,6 +155,16 @@ public class Cenario {
 		if (numeracao != other.numeracao)
 			return false;
 		return true;
+	}
+	
+	/**
+	 * Compara dois cenarios pela numeracao.
+	 * @return 0 se os dois forem iguais
+	 * 1 se this for maior
+	 * 2 se this for menor
+	 */
+	public int compareTo(Cenario c) {
+		return this.getNumeracao() - c.getNumeracao();
 	}
 	
 	

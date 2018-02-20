@@ -15,7 +15,8 @@ public class Facade {
 				"acceptance_test/us3_test.txt",
 				"acceptance_test/us4_test.txt",
 				"acceptance_test/us5_test.txt",
-				"acceptance_test/us6_test.txt"};
+				"acceptance_test/us6_test.txt",
+				"acceptance_test/us7_test.txt"};
 		EasyAccept.main(args);
 	}
 	public void inicializa(int caixa, double porcentagem) {
@@ -84,5 +85,13 @@ public class Facade {
 	
 	public void alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
 		this.sistema.alterarSeguroTaxa(cenario, apostaAssegurada, taxa);
+	}
+	
+	public void alterarOrdem(String ordem) {
+		this.sistema.alterarOrdem(ordem);
+	}
+	
+	public void exibirCenarioOrdenado(int numeracao) {
+		this.sistema.exibirCenarioOrdenado(numeracao);
 	}
 }
