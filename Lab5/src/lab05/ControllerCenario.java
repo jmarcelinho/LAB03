@@ -1,6 +1,8 @@
 package lab05;
 
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 /**
@@ -12,7 +14,7 @@ import java.util.Iterator;
  *
  */
 public class ControllerCenario {
-	private ArrayList<Cenario> cenarios;
+	private List<Cenario> cenarios;
 	
 	/**
 	 * Inicia o controller de cenario.
@@ -68,6 +70,17 @@ public class ControllerCenario {
 		return cenarios.size();
 	}
 	
+	private Cenario buscaCenario(int numeracao) {
+		Cenario cen = null;
+		for(Cenario cenario: cenarios) {
+			System.out.println(cenario.getNumeracao());
+			if(cenario.getNumeracao() == numeracao) {
+				cen =  cenario;
+			}
+		}
+		return cen;
+	}
+	
 	/**
 	 * Retorna uma string representando um cenario
 	 * pesquisado a partir da sua numeracao.
@@ -84,17 +97,14 @@ public class ControllerCenario {
 		return buscaCenario(numeracao).toString();
 	}
 	
-	private Cenario buscaCenario(int numeracao) {
-		Cenario cen = null;
-		for(Cenario cenario: cenarios) {
-			System.out.println(cenario.getNumeracao());
-			if(cenario.getNumeracao() == numeracao) {
-				cen =  cenario;
-			}
-		}
-		return cen;
+	public String exibirCenarioOrdenado(int numeracao) {
+		if(numeracao - 1 < 0)
+			throw new IllegalArgumentException("Erro na consulta de cenario ordenado: Cenario invalido");
+		else if(numeracao -1 >= cenarios.size())
+			throw new IllegalArgumentException("Erro na consulta de cenario ordenado: Cenario nao cadastrado");
+		return cenarios.get(numeracao - 1).toString();
+			
 	}
-	
 	/**
 	 * Retorna uma string representando uma lista
 	 * com a representacao de todos os cenarios 
@@ -186,6 +196,32 @@ public class ControllerCenario {
 		return rateio;
 	}
 	
+	/**
+	 * Incrementa o numero de apostas no cenario
+	 * @param cenario cenario que vai ser incrementado
+	 */
+	public void setNumeroAposta(int cenario) {
+		Cenario cen = buscaCenario(cenario);
+		cen.upNumeroAposta();
+	}
 	
+	/**
+	 * Altera a ordem no qual os cenarios sao ordenados.
+	 * @param ordem informa em qual ordem os cenarios serao ordenados
+	 */
+	public void alterarOrdem(String ordem) {
+		if(ordem == null || ordem.trim().equals("")) {
+			throw new IllegalArgumentException("Erro ao alterar ordem: Ordem nao pode ser vazia ou nula");
+		}
+		if(ordem.equals("nome")) {
+			Collections.sort(cenarios, new OrdenaPorNome());
+		}else if(ordem.equals("apostas")) {
+			Collections.sort(cenarios, new OrdenaPorAposta());
+		}else if(ordem.equals("cadastro")) {
+			Collections.sort(cenarios);
+		}else {
+			throw new IllegalArgumentException("Erro ao alterar ordem: Ordem invalida");
+		}
+	}
 }
 

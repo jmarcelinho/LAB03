@@ -1,5 +1,6 @@
 package lab05;
 
+
 public class SistemaApostas {
 	private int caixa;
 	private double porcentagemRetirada;
@@ -90,7 +91,7 @@ public class SistemaApostas {
 	 * @param nomeApostador nome do apostador.
 	 * @param valorAposta valor da aposta.
 	 * @param previsao previsao da aposta.
-	 * @param cenario cenario qual vai ser cadastrada a aposta.
+	 * @param cenario cenario qual vai ser cadastradaganizados a aposta.
 	 */
 	public void cadastrarAposta(int cenario, String nomeApostador, double valorAposta, String previsao) {
 		if(controleCenario.isValidCenario(cenario)==0) 
@@ -98,6 +99,7 @@ public class SistemaApostas {
 		else if(controleCenario.isValidCenario(cenario)==1)
 			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario nao cadastrado");
 		controleAposta.cadastrarAposta(cenario, nomeApostador, valorAposta, previsao);
+		controleCenario.setNumeroAposta(cenario);
 	}
 	
 	/**
@@ -116,6 +118,7 @@ public class SistemaApostas {
 		else if(controleCenario.isValidCenario(cenario)==1)
 			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por valor: Cenario nao cadastrado");
 		int ret = controleAposta.cadastrarAposta(cenario, nomeApostador, valorAposta, previsao, valor);
+		controleCenario.setNumeroAposta(cenario);
 		this.caixa += custo;
 		return ret;
 	}
@@ -125,7 +128,7 @@ public class SistemaApostas {
 	 * @param cenario id do cenario no qual a aposta sera cadastrada
 	 * @param nomeApostador nome do apostador
 	 * @param valorAposta valor da aposta a ser cadastrada.
-	 * @param previsao previsao da aposta a ser cadastrada.
+	 * @param previsao previsao da aposta a ser cadasganizadostrada.
 	 * @param taxa taxa da aposta assegurada.
 	 * @param custo custo do seguro da aposta.
 	 * @return id do cadastro da aposta.
@@ -136,6 +139,7 @@ public class SistemaApostas {
 		else if(controleCenario.isValidCenario(cenario)==1)
 			throw new IllegalArgumentException("Erro no cadastro de aposta assegurada por taxa: Cenario nao cadastrado");
 		int ret = controleAposta.cadastrarAposta(cenario, nomeApostador, valorAposta, previsao, taxa);
+		controleCenario.setNumeroAposta(cenario);
 		this.caixa += custo;
 		return ret;
 	}
@@ -155,7 +159,7 @@ public class SistemaApostas {
 	}
 	
 	/**
-	 * Retorna o numero total de apostas cadastradas
+	 * Retorna o numero total de apostas cadastradasganizados
 	 * em um cenario.
 	 * @param cenario numero do cenario a ser consultado.
 	 * @return numero de apostas cadastradas em um cenario.
@@ -181,8 +185,8 @@ public class SistemaApostas {
 	
 	/**
 	 * Fecha um cenario a partir da sua numeracao e 
-	 * a informacao se ele ocorreu ou nao.
-	 * A informacao se ocorreu ou nao ocorreu eh dada
+	 * a informacao se ele ocorreu ou nao."Erro ao alterar ordem: Ordem nao pode ser vazia ou nula"
+	 * A informacao se ocorreu ou nao ocorreu eh dadaganizados
 	 * a partir de um boolean que eh True se ocorreu
 	 * e False caso contrario.
 	 * 
@@ -250,6 +254,23 @@ public class SistemaApostas {
 	 */
 	public void alterarSeguroTaxa(int cenario, int apostaAssegurada, double taxa) {
 		this.controleAposta.alterarSeguroTaxa(cenario, apostaAssegurada, taxa);
+	}
+	
+	/**
+	 * Altera a ordem em que os cenarios serao ordenados
+	 * @param ordem informa a nova ordem dos cenarios.
+	 */
+	public void alterarOrdem(String ordem) {
+		controleCenario.alterarOrdem(ordem);
+	}
+	
+	/**
+	 * Retorna representacao de cenario que esta na ordem.
+	 * @param numeracao numero da ordem do cenario
+	 * @return representacao em string do cenario
+	 */
+	public String exibirCenarioOrdenado(int numeracao) {
+		return controleCenario.exibirCenarioOrdenado(numeracao);
 	}
 	
 }
